@@ -949,13 +949,16 @@ function renderActivityFeed(){
 
 // ── Init ──────────────────────────────────────
 async function loadApp(){
+  let fetchFailed=false;
   try{
     state=await dbLoad();
   }catch(e){
-    console.error("DB load failed:",e);
-    // Clear potentially corrupt localStorage and start fresh
-    try{localStorage.removeItem("kabbu_data");}catch(x){}
-    state=JSON.parse(JSON.stringify(EMPTY_STATE));
+    fetchFailed=true;
+    // Try localStorage cache before giving up
+    try{
+      const cached=localStorage.getItem("kabbu_data");
+      state=cached?JSON.parse(cached):JSON.parse(JSON.stringify(EMPTY_STATE));
+    }catch(x){state=JSON.parse(JSON.stringify(EMPTY_STATE));}
   }
   // Ensure state is always valid
   if(!state||typeof state!=="object")state=JSON.parse(JSON.stringify(EMPTY_STATE));
@@ -979,25 +982,24 @@ async function loadApp(){
   });
   const saved=sessionStorage.getItem("kabbu_user");
   const validSaved=saved&&saved!=="null"&&saved!=="undefined"&&saved.trim()!=="";
-  if(validSaved){
-    if(state.players.includes(saved)||(dbLoadFailed&&state.players.length===0)){
-      if(!state.players.includes(saved))state.players.push(saved);
-      currentUser=saved;
-      showMain();
-      if(dbLoadFailed)setTimeout(()=>showToast("⚠️","Connection issue","Could not reach the server. Using cached data — changes may not sync."),800);
-      return;
-    }
+  // Allow login if: player exists in state, OR fetch failed (don't lock them out on network error)
+  if(validSaved&&(state.players.includes(saved)||fetchFailed)){
+    if(!state.players.includes(saved))state.players.push(saved);
+    currentUser=saved;
+    showMain();
+    if(fetchFailed)setTimeout(()=>showToast("⚠️","Connection issue","Could not reach server. Check Supabase."),800);
+  }else{
+    sessionStorage.removeItem("kabbu_user");
+    currentUser=null;
+    showSelectUser();
+    if(fetchFailed)setTimeout(()=>showToast("⚠️","Connection issue","Could not reach server. Try refreshing."),800);
   }
-  sessionStorage.removeItem("kabbu_user");
-  currentUser=null;
-  showSelectUser();
-  if(dbLoadFailed)setTimeout(()=>showToast("⚠️","Connection issue","Could not reach the server. Check your connection and try again."),800);
 }
 
 // ── Screens ───────────────────────────────────
 function showSelectUser(){document.getElementById("screen-selectuser").style.display="flex";document.getElementById("main-app").style.display="none";renderPlayerList();}
 function showMain(){
-  if(!currentUser){console.error("showMain called with no currentUser");showSelectUser();return;}
+  if(!currentUser){showSelectUser();return;}
   document.getElementById("screen-selectuser").style.display="none";
   document.getElementById("main-app").style.display="block";
   try{refreshAll();}catch(e){console.error("refreshAll failed:",e);}
