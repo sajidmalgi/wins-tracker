@@ -61,7 +61,9 @@
     .sp-suits span:nth-child(3){animation-delay:0.95s;color:#8a7055}
     .sp-suits span:nth-child(4){animation-delay:1.1s;color:#7a4040}
     .sp-card{font-size:80px;margin-top:28px;animation:cardFloat 3s ease-in-out 1.3s infinite both,fadeIn 0.5s ease 1.3s both;filter:drop-shadow(0 8px 24px rgba(201,137,58,0.2))}
-    .sp-hint{position:absolute;bottom:48px;font-size:11px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;font-family:'Syne',sans-serif;animation:pulse 2s ease 2.2s infinite both,fadeIn 0.5s ease 2.2s both;text-align:center}
+    .sp-hint{position:absolute;bottom:48px;font-size:9.5px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;font-family:'Syne',sans-serif;animation:pulse 2s ease 2.2s infinite both,fadeIn 0.5s ease 2.2s both;text-align:center;line-height:1.7;padding:0 28px}
+    .sp-hint div{display:block}
+    .sp-hint div:first-child{color:var(--green-hi);opacity:0.75;margin-bottom:2px}
     .sp-tap-feedback{position:absolute;bottom:78px;font-size:13px;color:var(--green-hi);font-weight:800;font-family:'Syne',sans-serif;opacity:0;transition:opacity 0.2s;letter-spacing:0.1em}
 
     /* ── Loading ── */
@@ -121,7 +123,7 @@
 
     /* ── Stats ── */
     .stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-    .stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center}
+    .stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:76px}
     .stat-val{font-size:24px;font-weight:800;font-family:'Syne',sans-serif;color:var(--green-hi);letter-spacing:-0.03em}
     .stat-lbl{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:0.08em;margin-top:3px;text-transform:uppercase;font-family:'Syne',sans-serif}
     .page-title{font-size:clamp(22px,6vw,28px);font-weight:800;font-family:'Syne',sans-serif;color:var(--text);letter-spacing:-0.02em;margin-bottom:4px;line-height:1.1}
@@ -168,7 +170,8 @@
     .admin-del:hover{color:var(--red)}
 
     /* ── Champion ── */
-    .champion-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2a1e0a,#1a150a);border:1px solid #5a3d1a;border-radius:14px;padding:12px 16px;margin-bottom:16px}
+    .champion-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2a1e0a,#1a150a);border:1px solid #5a3d1a;border-radius:14px;padding:12px 16px;margin-bottom:16px;cursor:pointer;user-select:none;transition:transform 0.08s}
+    .champion-bar:active{transform:scale(0.98)}
 
     /* ── Easter egg overlay ── */
     #egg-overlay{position:fixed;inset:0;z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);cursor:pointer;padding:32px}
@@ -192,6 +195,7 @@
 
     /* ── Spots section ── */
     .spot-card-velvet{background:linear-gradient(135deg,#1a2010,var(--bg2));border:1px solid #4a3a18;border-radius:12px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+    .spot-card-couch{background:linear-gradient(135deg,#1f1810,var(--bg2));border:1px solid #3a2f18;border-radius:12px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
     .spot-card-penalty{background:linear-gradient(135deg,#2a1510,var(--bg2));border:1px solid #5a2d2d;border-radius:12px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
 
     /* ── Toast notifications ── */
@@ -202,6 +206,80 @@
     .toast-emoji{font-size:18px;flex-shrink:0}
     .toast-text{font-size:13px;color:var(--text2);font-weight:500;line-height:1.4}
     .toast-title{font-size:11px;font-weight:800;font-family:'Syne',sans-serif;color:var(--green-hi);letter-spacing:0.04em;margin-bottom:2px}
+
+    /* ── Log mode tabs ── */
+    .mode-tabs{display:flex;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:20px;gap:2px}
+    .mode-tab{flex:1;background:none;border:none;padding:10px 6px;border-radius:9px;color:var(--muted);font-size:11px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.15s;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+    .mode-tab.active{background:var(--bg3);color:var(--green-hi);box-shadow:0 1px 0 rgba(201,137,58,0.2)}
+    .mode-tab .mt-sub{font-size:9px;opacity:0.6;letter-spacing:0.06em;font-weight:600}
+    .mode-tab.active .mt-sub{opacity:1}
+
+    /* ── Session scoreboard ── */
+    .session-header{background:linear-gradient(135deg,#1a2a3a,var(--bg2));border:1px solid #2d476b;border-radius:14px;padding:14px 16px;margin-bottom:16px}
+    .session-tally-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:11px;margin-bottom:6px;cursor:pointer;transition:border-color 0.15s,transform 0.08s}
+    .session-tally-row:active{transform:scale(0.98)}
+    .session-tally-row.leading{border-color:var(--green);background:linear-gradient(135deg,#2a1e0a,var(--bg2))}
+    .session-tally-count{font-size:22px;font-weight:800;font-family:'Syne',sans-serif;color:var(--green-hi);min-width:32px;text-align:center}
+    .session-history-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--border2);font-weight:500}
+    .session-history-row:last-child{border-bottom:none}
+    .session-undo-btn{background:none;border:none;color:var(--dim);font-size:11px;padding:2px 6px;cursor:pointer;margin-left:auto;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:0.04em}
+    .session-undo-btn:hover{color:var(--red)}
+
+    /* ── Team win chip ── */
+    .team-toggle{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:11px 14px;margin-bottom:14px;cursor:pointer;transition:border-color 0.15s;user-select:none}
+    .team-toggle.active{border-color:#2d476b;background:linear-gradient(135deg,#1a2a3a,var(--bg2))}
+    .team-toggle .tt-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+    .team-toggle.active .tt-check{background:#60a5fa;border-color:#60a5fa;color:#fff}
+
+    /* ── Tier accents (subtle group-wide accent color shift) ── */
+    /* These override specific accents per tier. We use classes on body so we can toggle. */
+    body.tier-1 .streak{background:#2a1500;border-color:#7a4200;color:#fbbf24}
+    body.tier-2{--green-hi:#f2b855;--green:#d89a42}
+    body.tier-2 .streak{background:#2a1500;border-color:#8a4a00;color:#fcd34d}
+    body.tier-2 .champion-bar{background:linear-gradient(135deg,#30210a,#1a150a);border-color:#6b4a1f}
+    body.tier-3{--green-hi:#fbcc67;--green:#e0a844}
+    body.tier-3 .champion-bar{background:linear-gradient(135deg,#3a260a,#1c160a);border-color:#8a5a2a;box-shadow:0 0 0 1px rgba(251,204,103,0.1) inset}
+    body.tier-3 .streak{background:#2f1600;border-color:#9a5200;color:#fde68a}
+    body.tier-4{--green-hi:#f4c97a;--green:#d8a34d}
+    body.tier-4 .champion-bar{background:linear-gradient(135deg,#2a1a3a,#1a150a);border-color:#6b4aa0}
+    body.tier-4 .streak{background:#1a0f2a;border-color:#6b3aa0;color:#c4b5fd}
+    body.tier-4 .verify-approved{background:#1a1a3a;border-color:#4d4d8a;color:#a5a5f5}
+    body.tier-5{--green-hi:#e8e8f0;--green:#b8b8c8}
+    body.tier-5 .champion-bar{background:linear-gradient(135deg,#2a2a3a,#1a1a22);border-color:#7a7a9a;box-shadow:0 0 20px rgba(200,200,220,0.15)}
+    body.tier-5 .streak{background:#1a1a2a;border-color:#6a6a8a;color:#e8e8f0}
+    body.tier-5 .tag-Sequence{box-shadow:0 0 0 1px rgba(255,255,255,0.08)}
+
+    /* Tier badge shown on home header */
+    .tier-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(201,137,58,0.12);border:1px solid rgba(201,137,58,0.3);border-radius:99px;padding:2px 8px;font-size:9px;color:var(--green-hi);font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.06em;text-transform:uppercase;margin-left:6px;cursor:pointer;transition:border-color 0.15s}
+    .tier-badge:active{border-color:var(--green-hi)}
+    body.tier-4 .tier-badge{background:rgba(107,74,160,0.15);border-color:rgba(107,74,160,0.4);color:#c4b5fd}
+    body.tier-5 .tier-badge{background:rgba(200,200,220,0.12);border-color:rgba(200,200,220,0.3);color:#e8e8f0}
+
+    /* ── Leaderboard spice ── */
+    .spice-card{border-radius:14px;padding:14px 16px;margin-bottom:12px;position:relative;overflow:hidden}
+    .spice-beef{background:linear-gradient(135deg,#2a1515 0%,#1a0e0e 100%);border:1px solid #5a2d2d}
+    .spice-stat{background:linear-gradient(135deg,#1a1f2a 0%,#0e1118 100%);border:1px solid #2d3d5a}
+    .spice-achievement{background:linear-gradient(135deg,#2a200a 0%,#1a1408 100%);border:1px solid #5a4018}
+    .spice-header{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px}
+    .spice-beef .spice-header{color:#f87171}
+    .spice-stat .spice-header{color:#60a5fa}
+    .spice-achievement .spice-header{color:#fbbf24}
+    .spice-body{font-size:13px;color:var(--text2);font-weight:500;line-height:1.5}
+    .spice-body strong{color:var(--text);font-weight:800;font-family:'Syne',sans-serif}
+    .spice-rotator{display:flex;gap:6px;justify-content:center;margin-top:10px}
+    .spice-rotator button{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;cursor:pointer;padding:0;transition:background 0.2s}
+    .spice-rotator button.active{background:rgba(255,255,255,0.7)}
+
+    /* ── Refresh button ── */
+    .refresh-btn{background:var(--bg2);border:1px solid var(--border);border-radius:99px;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;transition:color 0.15s,border-color 0.15s;flex-shrink:0}
+    .refresh-btn:active{color:var(--green-hi);border-color:var(--green)}
+    .refresh-btn.spinning svg{animation:spin 0.6s linear}
+    .page-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}
+    .page-title-row .page-title{margin-bottom:0}
+
+    /* ── Clickable names ── */
+    .clickable-name{border-bottom:1px dotted transparent;transition:border-color 0.15s,color 0.15s}
+    .clickable-name:hover,.clickable-name:active{border-bottom-color:var(--muted);color:var(--text)}
 
     /* ── Activity section on home ── */
     .activity-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2)}
@@ -222,7 +300,10 @@
   <div class="sp-suits"><span>♠</span><span>♥</span><span>♦</span><span>♣</span></div>
   <div class="sp-card">🃏</div>
   <div id="sp-tap-feedback" class="sp-tap-feedback"></div>
-  <div class="sp-hint">Tap the title 3× for a secret · Tap anywhere to enter</div>
+  <div class="sp-hint">
+    <div>Tap the title 3× for a secret</div>
+    <div>Tap anywhere to enter</div>
+  </div>
 </div>
 
 <!-- Loading -->
@@ -270,6 +351,24 @@
       <button onclick="addSpot('velvet')" class="btn-primary">Add to the Velvet Rope</button>
     </div>
     <button onclick="toggleSpotAdd('velvet')" class="btn-ghost" id="velvet-add-btn" style="width:100%;margin-top:8px;padding:10px">+ Add a Premier Spot</button>
+  </div>
+
+  <!-- The Couch (middle tier) -->
+  <div style="margin-bottom:28px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:18px">🛋️</span>
+      <div>
+        <div style="font-size:16px;font-weight:800;font-family:'Syne',sans-serif;color:#d4a574">The Couch</div>
+        <div style="font-size:11px;color:var(--muted);font-weight:500">Mid-tier spots — they'll do when nothing else works</div>
+      </div>
+    </div>
+    <div id="couch-list"></div>
+    <div id="couch-add" style="display:none;flex-direction:column;gap:8px">
+      <input id="couch-name" type="text" class="input" placeholder="Spot name…"/>
+      <textarea id="couch-desc" class="input" rows="2" placeholder="It's fine. It exists." style="resize:none;line-height:1.5"></textarea>
+      <button onclick="addSpot('couch')" style="width:100%;background:#2a2010;border:1px solid #5a4a30;border-radius:14px;padding:14px;color:#d4a574;font-size:13px;font-weight:700;font-family:'Syne',sans-serif">Add to The Couch</button>
+    </div>
+    <button onclick="toggleSpotAdd('couch')" class="btn-ghost" id="couch-add-btn" style="width:100%;margin-top:8px;padding:10px">+ Add a Middle-Tier Spot</button>
   </div>
 
   <!-- Penalty Box -->
@@ -323,23 +422,37 @@
           <div style="display:flex;align-items:center;gap:12px">
             <div id="home-avatar" class="avatar" style="width:46px;height:46px;font-size:18px;cursor:pointer;box-shadow:0 0 0 2px var(--border)" onclick="setTab('profile')"></div>
             <div>
-              <div style="font-size:10px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:2px;font-family:'Syne',sans-serif">Card Night</div>
+              <div style="font-size:10px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:2px;font-family:'Syne',sans-serif;display:flex;align-items:center">Card Night<span id="tier-badge-home"></span></div>
               <h1 style="font-size:22px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);margin:0;letter-spacing:-0.02em">Hey, <span id="home-username"></span> 👋</h1>
             </div>
           </div>
-
+          <div style="display:flex;gap:6px;align-items:center">
+            <button class="refresh-btn" onclick="refreshThisTab(event)" title="Refresh">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </button>
+            <button onclick="switchUser()" class="btn-ghost" style="display:flex;align-items:center;gap:5px;font-size:10px">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>SWITCH
+            </button>
+          </div>
         </div>
-        <div id="champion-bar" style="display:none" class="champion-bar">
+        <div id="champion-bar" style="display:none" class="champion-bar" onclick="roastChampion()">
           <span style="font-size:22px">👑</span>
-          <div><div style="font-size:9px;color:var(--muted);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-family:'Syne',sans-serif">Last Champion</div>
+          <div style="flex:1"><div style="font-size:9px;color:var(--muted);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-family:'Syne',sans-serif">Last Champion</div>
           <div id="champion-name" style="font-size:14px;font-weight:700;color:var(--text);font-family:'Syne',sans-serif"></div></div>
+          <span style="font-size:10px;color:var(--dim);font-weight:600;font-family:'Syne',sans-serif">tap 👑</span>
         </div>
         <div class="stats-grid">
           <div class="stat-box"><div class="stat-val" id="stat-total">0</div><div class="stat-lbl">Games</div></div>
           <div class="stat-box"><div class="stat-val" id="stat-wins">0</div><div class="stat-lbl">Your Wins</div></div>
-          <div class="stat-box"><div class="stat-val" id="stat-game" style="font-size:16px">—</div><div class="stat-lbl">Top Game</div></div>
+          <div class="stat-box"><div class="stat-val" id="stat-game" style="font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.5">—</div><div class="stat-lbl">Top Game</div></div>
         </div>
       </div>
+      <!-- In-app activity / notifications — sits above matches so it's not buried -->
+      <div id="activity-section" style="margin-top:22px;display:none">
+        <h2 style="font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);letter-spacing:0.02em;text-transform:uppercase;margin-bottom:12px">🔔 For You</h2>
+        <div id="activity-list" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:4px 16px"></div>
+      </div>
+
       <div style="margin-top:22px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
           <h2 style="font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);letter-spacing:0.02em;text-transform:uppercase">Recent Matches</h2>
@@ -349,19 +462,20 @@
         </div>
         <div id="recent-matches"><div class="empty">No matches yet. Log your first win! 🃏</div></div>
       </div>
-
-      <!-- In-app activity / notifications -->
-      <div id="activity-section" style="margin-top:24px;display:none">
-        <h2 style="font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);letter-spacing:0.02em;text-transform:uppercase;margin-bottom:12px">🔔 For You</h2>
-        <div id="activity-list" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:4px 16px"></div>
-      </div>
     </div>
 
     <!-- Leaders -->
     <div id="tab-leaders" class="screen fade-in">
-      <h1 class="page-title">Leaderboard 🏆</h1>
-      <p class="page-sub" style="margin-bottom:16px">Who's the GOAT?</p>
-      <div style="margin-bottom:20px">
+      <div class="page-title-row">
+        <div>
+          <h1 class="page-title">Leaderboard 🏆</h1>
+          <p class="page-sub" style="margin-bottom:0">Who's the GOAT?</p>
+        </div>
+        <button class="refresh-btn" onclick="refreshThisTab(event)" title="Refresh">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+      </div>
+      <div style="margin-top:16px">
         <select id="leader-filter-select" class="input" style="appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a7055' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:0.04em" onchange="setLeaderFilter(this.value)">
           <option value="All">All Games</option>
           <option value="Sequence">Sequence</option>
@@ -372,6 +486,8 @@
           <option value="Other">Other</option>
         </select>
       </div>
+      <!-- Beef / rivalry spotlight — populated by renderLeaderboardSpice() -->
+      <div id="leader-spice"></div>
       <div id="leader-list"></div>
     </div>
 
@@ -379,17 +495,16 @@
     <div id="tab-chat" class="screen fade-in">
       <!-- Scrollable posts -->
       <div style="flex:1;overflow-y:auto;padding:52px 20px 12px;min-height:0">
-        <h1 class="page-title">Banter 💬</h1>
-        <p class="page-sub" style="margin-bottom:16px">Say your piece</p>
-        <div id="banter-code-bar" style="display:none;align-items:center;gap:12px;background:#1a2010;border:1px solid #3a5a3a;border-radius:12px;padding:12px 14px;margin-bottom:14px;flex-shrink:0">
-          <span style="font-size:20px;flex-shrink:0">📜</span>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:12px;font-weight:800;font-family:'Syne',sans-serif;color:#4ade80;letter-spacing:0.03em;margin-bottom:2px">Sign The Code</div>
-            <div style="font-size:11px;color:var(--muted);font-weight:500;line-height:1.4">Commit to playing fair — or get called out every time you post 💩</div>
+        <div class="page-title-row">
+          <div>
+            <h1 class="page-title">Banter 💬</h1>
+            <p class="page-sub" style="margin-bottom:0">Say your piece</p>
           </div>
-          <button onclick="signTheCode()" style="background:#1a3a2a;border:1px solid #2d6b47;border-radius:10px;padding:8px 14px;color:#4ade80;font-size:11px;font-weight:800;font-family:'Syne',sans-serif;white-space:nowrap;flex-shrink:0">Sign it 🛡️</button>
+          <button class="refresh-btn" onclick="refreshThisTab(event)" title="Refresh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          </button>
         </div>
-        <div id="banter-list"></div>
+        <div id="banter-list" style="margin-top:16px"></div>
       </div>
       <!-- Compose — always visible, never cut off -->
       <div style="flex-shrink:0;background:var(--bg2);border-top:1px solid var(--border);padding:10px 16px 14px">
@@ -406,13 +521,29 @@
 
     <!-- Log Win -->
     <div id="tab-log" class="screen fade-in">
-      <h1 class="page-title">Log a Win</h1>
-      <p class="page-sub">Record who crushed it tonight</p>
-      <div id="log-success" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:50vh">
+      <h1 class="page-title">Log Wins</h1>
+      <p class="page-sub">Track who's crushing it</p>
+
+      <!-- Mode switcher -->
+      <div class="mode-tabs">
+        <button class="mode-tab active" id="mode-tab-single" onclick="setLogMode('single')">
+          Single
+          <span class="mt-sub">one match</span>
+        </button>
+        <button class="mode-tab" id="mode-tab-session" onclick="setLogMode('session')">
+          Session
+          <span class="mt-sub">bulk logging</span>
+        </button>
+      </div>
+
+      <!-- Success screen -->
+      <div id="log-success" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:40vh">
         <div style="font-size:60px">🃏</div>
         <div style="font-size:24px;font-weight:800;font-family:'Syne',sans-serif;color:var(--green-hi);letter-spacing:-0.02em">Match Logged!</div>
-        <div id="log-success-msg" style="font-size:13px;color:var(--muted);text-align:center;padding:0 24px;line-height:1.7;font-weight:500"></div>
+        <div id="log-success-msg" style="font-size:13px;color:var(--muted);text-align:center;padding:0 24px;line-height:1.7;font-weight:500;white-space:pre-line"></div>
       </div>
+
+      <!-- ── SINGLE MODE ── -->
       <div id="log-form">
         <div class="field">
           <label class="label">Game *</label>
@@ -421,12 +552,31 @@
             <option>Sequence</option><option>Kabbu</option><option>President</option><option>Backgammon</option><option>Chess</option><option>Other</option>
           </select>
         </div>
+
+        <!-- Team win toggle — shows only for Sequence -->
+        <div id="log-team-toggle-wrap" style="display:none" class="field">
+          <div id="log-team-toggle" class="team-toggle" onclick="toggleTeamWin()">
+            <div class="tt-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none" id="tt-check-icon"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--text);font-family:'Syne',sans-serif">Team Win <span style="font-size:10px;color:var(--muted);font-weight:600;font-family:'DM Sans',sans-serif">— 2 winners on the same team</span></div>
+              <div style="font-size:11px;color:var(--muted);font-weight:500;margin-top:2px">Both teammates get the W on the leaderboard</div>
+            </div>
+          </div>
+        </div>
+
         <div class="field">
-          <label class="label">Winner *</label>
+          <label class="label" id="log-winner-label">Winner *</label>
           <select id="log-winner" class="input" style="appearance:none"><option value="">Select winner…</option></select>
         </div>
+
+        <!-- Teammate picker — shows only when team win is on -->
+        <div id="log-teammate-wrap" class="field" style="display:none">
+          <label class="label">Teammate *</label>
+          <select id="log-teammate" class="input" style="appearance:none"><option value="">Select teammate…</option></select>
+        </div>
+
         <div class="field">
-          <label class="label">Other Players * <span style="text-transform:none;letter-spacing:0;opacity:0.6;font-size:10px;font-family:'DM Sans',sans-serif">— select at least 1</span></label>
+          <label class="label" id="log-others-label">Other Players * <span style="text-transform:none;letter-spacing:0;opacity:0.6;font-size:10px;font-family:'DM Sans',sans-serif">— select at least 1</span></label>
           <div id="log-players-list"></div>
         </div>
         <div class="field">
@@ -435,6 +585,46 @@
         </div>
         <div id="log-preview" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:18px;align-items:center;gap:8px;flex-wrap:wrap"></div>
         <button id="log-submit" onclick="logMatch()" class="btn-primary" disabled style="background:var(--bg3);color:var(--dim)">Save Match ✓</button>
+      </div>
+
+      <!-- ── SESSION MODE ── -->
+      <div id="session-setup" style="display:none">
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px;font-weight:500">Pick the game and who's playing <em>once</em>. Then tap a name after each round to log the win. No more stopping to log every 5 minutes.</p>
+        <div class="field">
+          <label class="label">Game *</label>
+          <select id="session-game" class="input" style="appearance:none">
+            <option value="">Select a game…</option>
+            <option>Sequence</option><option>Kabbu</option><option>President</option><option>Backgammon</option><option>Chess</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label">Players in this session * <span style="text-transform:none;letter-spacing:0;opacity:0.6;font-size:10px;font-family:'DM Sans',sans-serif">— select at least 2</span></label>
+          <div id="session-players-list"></div>
+        </div>
+        <button id="session-start-btn" onclick="startSession()" class="btn-primary" disabled style="background:var(--bg3);color:var(--dim)">Start Session →</button>
+      </div>
+
+      <!-- Active session live UI -->
+      <div id="session-live" style="display:none">
+        <div class="session-header">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;color:#60a5fa;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.2em;text-transform:uppercase">● Live Session</span>
+            </div>
+            <span id="session-game-label" style="font-size:11px;color:var(--muted);font-weight:700;font-family:'Syne',sans-serif"></span>
+          </div>
+          <div style="font-size:13px;color:var(--text2);font-weight:500;line-height:1.5">Tap the winner after each round. Tap <strong style="color:var(--text)">End Session</strong> when you're done.</div>
+        </div>
+
+        <label class="label">Tap to log a win</label>
+        <div id="session-tally"></div>
+
+        <div id="session-history-wrap" style="display:none;margin-top:20px">
+          <label class="label">This session's rounds <span id="session-round-count" style="text-transform:none;letter-spacing:0;opacity:0.6;font-size:10px;font-family:'DM Sans',sans-serif"></span></label>
+          <div id="session-history" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:4px 14px;max-height:200px;overflow-y:auto"></div>
+        </div>
+
+        <button onclick="endSession()" style="width:100%;margin-top:16px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;color:var(--text2);font-size:13px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.04em">End Session</button>
       </div>
     </div>
 
@@ -488,14 +678,29 @@
           </label>
           <p style="font-size:11px;color:var(--dim);text-align:center;line-height:1.5">Export saves everything — players, matches, banter, spots. Import restores a previous backup.</p>
         </div>
+        <!-- Easter Egg Legend -->
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border2)">
+          <div style="font-size:10px;font-weight:700;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;font-family:'Syne',sans-serif;margin-bottom:8px">🥚 Secrets Catalogue</div>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Admin-only. Don't spoil these for the others.</p>
+          <button onclick="toggleEggLegend()" class="btn-ghost" style="width:100%;padding:10px" id="egg-legend-btn">Show All Secrets</button>
+          <div id="egg-legend" style="display:none;margin-top:10px"></div>
+        </div>
       </div>
       <button onclick="switchUser()" style="width:100%;margin-top:14px;background:none;border:1px solid var(--border);border-radius:14px;padding:14px;color:var(--muted);font-size:12px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.04em">SIGN OUT</button>
     </div>
 
     <!-- Spots Tab -->
     <div id="tab-spots" class="screen fade-in">
-      <h1 class="page-title">The Spots 📍</h1>
-      <p class="page-sub">Card night venues — ranked by the people</p>
+      <div class="page-title-row">
+        <div>
+          <h1 class="page-title">The Spots 📍</h1>
+          <p class="page-sub" style="margin-bottom:0">Card night venues — ranked by the people</p>
+        </div>
+        <button class="refresh-btn" onclick="refreshThisTab(event)" title="Refresh">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+      </div>
+      <div style="margin-top:16px">
 
       <!-- Velvet Rope Accordion -->
       <div style="margin-bottom:12px;background:var(--bg2);border:1px solid #3a2d18;border-radius:14px;overflow:hidden">
@@ -521,6 +726,30 @@
         </div>
       </div>
 
+      <!-- The Couch Accordion (middle tier) -->
+      <div style="margin-bottom:12px;background:var(--bg2);border:1px solid #3a2f18;border-radius:14px;overflow:hidden">
+        <button onclick="toggleAccordion('couch')" style="width:100%;background:none;border:none;padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:18px">🛋️</span>
+            <div style="text-align:left">
+              <div style="font-size:15px;font-weight:800;font-family:'Syne',sans-serif;color:#d4a574">The Couch</div>
+              <div style="font-size:11px;color:var(--muted);font-weight:500" id="couch-count">Mid-tier — they'll do</div>
+            </div>
+          </div>
+          <span id="couch-chevron" style="color:var(--muted);font-size:18px;transition:transform 0.2s">›</span>
+        </button>
+        <div id="accordion-couch" style="display:none;padding:0 14px 14px">
+          <div id="tab-couch-list"></div>
+          <div id="tab-couch-add" style="display:none;flex-direction:column;gap:8px;margin-top:8px">
+            <input id="tab-couch-name" type="text" class="input" placeholder="Spot name…"/>
+            <textarea id="tab-couch-desc" class="input" rows="2" placeholder="It's fine. It exists." style="resize:none;line-height:1.5"></textarea>
+            <button onclick="addSpotTab('couch')" style="width:100%;background:#2a2010;border:1px solid #5a4a30;border-radius:14px;padding:14px;color:#d4a574;font-size:13px;font-weight:700;font-family:'Syne',sans-serif">Add to The Couch</button>
+            <button onclick="toggleSpotAddTab('couch')" style="width:100%;background:none;border:1px solid var(--border);border-radius:10px;padding:10px;color:var(--muted);font-size:12px;font-weight:700;font-family:'Syne',sans-serif">Cancel</button>
+          </div>
+          <button onclick="toggleSpotAddTab('couch')" id="tab-couch-add-btn" class="btn-ghost" style="width:100%;padding:10px;margin-top:8px">+ Add a Middle-Tier Spot</button>
+        </div>
+      </div>
+
       <!-- Penalty Box Accordion -->
       <div style="margin-bottom:12px;background:var(--bg2);border:1px solid #3a1818;border-radius:14px;overflow:hidden">
         <button onclick="toggleAccordion('penalty')" style="width:100%;background:none;border:none;padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
@@ -543,6 +772,7 @@
           </div>
           <button onclick="toggleSpotAddTab('penalty')" id="tab-penalty-add-btn" class="btn-ghost" style="width:100%;padding:10px;margin-top:8px">+ Add a Penalty Box Spot</button>
         </div>
+      </div>
       </div>
     </div>
 
@@ -607,6 +837,7 @@
         <button onclick="castVerify(true)"  style="flex:1;background:#1a3a2a;border:1px solid #2d6b47;border-radius:14px;padding:14px;color:var(--green-hi);font-size:13px;font-weight:800;font-family:'Syne',sans-serif">✓ CONFIRM</button>
       </div>
     </div>
+  </div>
   <!-- Player Profile Modal -->
   <div id="player-modal" class="modal-bg" onclick="closePlayerModal()">
     <div class="modal" onclick="event.stopPropagation()">
@@ -616,8 +847,9 @@
         <div id="player-modal-badge" style="margin-top:6px"></div>
         <div id="player-modal-bio" style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6;font-weight:500;max-width:260px;margin-left:auto;margin-right:auto"></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px" id="player-modal-stats"></div>
-      <button onclick="closePlayerModal()" style="width:100%;background:none;border:1px solid var(--border);border-radius:14px;padding:13px;color:var(--muted);font-size:12px;font-weight:700;font-family:'Syne',sans-serif">CLOSE</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px" id="player-modal-stats"></div>
+      <div id="player-modal-h2h"></div>
+      <button onclick="closePlayerModal()" style="width:100%;margin-top:16px;background:none;border:1px solid var(--border);border-radius:14px;padding:13px;color:var(--muted);font-size:12px;font-weight:700;font-family:'Syne',sans-serif">CLOSE</button>
     </div>
   </div>
 
@@ -659,16 +891,104 @@ const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 // Easter eggs: trigger phrases → {emoji, title, sub}
 const EASTER_EGGS = [
-  {triggers:["jeet gaye","jeet gaya"],emoji:"🎭",title:"JEET GAYE!!",sub:"Bhai… it's not even your turn 😭"},
-  {triggers:["aiman cheats","aiman is cheating","aiman cheat"],emoji:"🕵️",title:"Aiman Cheats",sub:"The evidence is mounting. The case file is thick. The jury is NOT impartial."},
-  {triggers:["pot kya hey","pot kya hai","pot kya he"],emoji:"🍲",title:"Pot Kya Hey??",sub:"Sir this is a card table. Please. Walk away."},
-  {triggers:["can't see diagonals","cant see diagonals","no diagonals","diagonal"],emoji:"🫣",title:"Can't See Diagonals",sub:"It's RIGHT THERE. The line goes corner to corner. This is a SEQUENCE."},
-  {triggers:["winner has to shuffle","winner shuffle","winner shuffles"],emoji:"🔀",title:"Winner Has To Shuffle",sub:"Democracy in action. Nobody asked you to win that many times."},
+  {triggers:["jeet gaye","jeet gaya"],emoji:"🎭",title:"JEET GAYE!!",sub:"Bhai… it's not even your turn 😭",hint:"Declare victory too early in Banter"},
+  {triggers:["aiman cheats","aiman is cheating","aiman cheat"],emoji:"🕵️",title:"Aiman Cheats",sub:"The evidence is mounting. The case file is thick. The jury is NOT impartial.",hint:"Accuse a certain someone in Banter"},
+  {triggers:["pot kya hey","pot kya hai","pot kya he"],emoji:"🍲",title:"Pot Kya Hey??",sub:"Sir this is a card table. Please. Walk away.",hint:"Ask a question that has no place at a card table"},
+  {triggers:["can't see diagonals","cant see diagonals","no diagonals","diagonal"],emoji:"🫣",title:"Can't See Diagonals",sub:"It's RIGHT THERE. The line goes corner to corner. This is a SEQUENCE.",hint:"Mention diagonals in Banter"},
+  {triggers:["winner has to shuffle","winner shuffle","winner shuffles"],emoji:"🔀",title:"Winner Has To Shuffle",sub:"Democracy in action. Nobody asked you to win that many times.",hint:"Invoke the oldest rule in the book"},
+  {triggers:["gg","good game"],emoji:"🤝",title:"GG",sub:"GG. Go get 'em next time. Or don't. I'm an app, I don't care.",hint:"Be a good sport in Banter"},
+  {triggers:["house rules","house rule"],emoji:"📜",title:"House Rules?",sub:"There are no house rules. Only winners and liars.",hint:"Invoke house rules in Banter"},
+  {triggers:["one more","one more game","ek aur","ek aur game"],emoji:"⏰",title:"One More Game",sub:"It is never one more game. It has never been one more game. You know this.",hint:"Lie about how many games are left"},
+  {triggers:["sweep","swept","clean sweep"],emoji:"🧹",title:"Sweep",sub:"Somebody get the broom. And the dignity.",hint:"Describe total domination in Banter"},
+  {triggers:["wallah","wallahi","i swear"],emoji:"🤚",title:"On Everything",sub:"Swearing about cards is how you summon the deck gods. They do not favour you.",hint:"Swear on something during Banter"},
+  {triggers:["rematch","re-match"],emoji:"🔁",title:"Rematch",sub:"The rematch only works if you actually win this time.",hint:"Demand one in Banter"},
 ];
 
-let state={players:[],matches:[],posts:[],profiles:{},spots:{velvet:[],penalty:[]},theCode:{signatories:[]}};
+let state={players:[],matches:[],posts:[],profiles:{},spots:{velvet:[],couch:[],penalty:[]},theCode:{signatories:[]}};
 let currentUser=null,currentTab="home",leaderFilter="All";
 let pinTarget=null,verifyTarget=null,splashDone=false;
+
+// ── Tier / milestone system ───────────────────
+// Tiers unlock at milestones of total valid matches across the whole group.
+// We layer a CSS class onto <body> so CSS can tint accents subtly per tier.
+const TIERS=[
+  {min:0,max:49,name:"Warming Up",cls:"tier-0",emoji:"🃏"},
+  {min:50,max:99,name:"Getting Serious",cls:"tier-1",emoji:"♠️"},
+  {min:100,max:199,name:"Pro Table",cls:"tier-2",emoji:"👑"},
+  {min:200,max:299,name:"Veteran Hall",cls:"tier-3",emoji:"🏆"},
+  {min:300,max:499,name:"Legends",cls:"tier-4",emoji:"💎"},
+  {min:500,max:Infinity,name:"Hall of Fame",cls:"tier-5",emoji:"🌟"},
+];
+const MILESTONES=[50,100,200,300,400,500,750,1000];
+
+function currentTier(){
+  const count=state.matches.filter(m=>!isRejected(m)).length;
+  return TIERS.find(t=>count>=t.min&&count<=t.max)||TIERS[0];
+}
+
+function applyTierClass(){
+  const tier=currentTier();
+  document.body.classList.remove(...TIERS.map(t=>t.cls));
+  document.body.classList.add(tier.cls);
+}
+
+// Check if we've just crossed a milestone (vs. the last-seen value in localStorage)
+function checkMilestoneCelebration(){
+  try{
+    const count=state.matches.filter(m=>!isRejected(m)).length;
+    const seen=parseInt(localStorage.getItem("kabbu_milestone_seen")||"0",10);
+    // Find the highest milestone we're now at-or-past that we hadn't seen before
+    const just=MILESTONES.filter(m=>count>=m && seen<m).pop();
+    if(just){
+      localStorage.setItem("kabbu_milestone_seen",String(count));
+      setTimeout(()=>showMilestoneCelebration(just),600);
+    } else if(count>seen){
+      // Keep the baseline updated so we don't re-trigger old milestones
+      localStorage.setItem("kabbu_milestone_seen",String(count));
+    }
+  }catch(e){}
+}
+
+function showMilestoneCelebration(n){
+  const tier=TIERS.find(t=>n>=t.min&&n<=t.max)||TIERS[0];
+  const messages={
+    50:{title:"50 Games!",sub:"We're getting somewhere. The cards have stories now."},
+    100:{title:"100 Games!!",sub:"Triple digits. This is a group with history."},
+    200:{title:"200 Games Deep",sub:"Two hundred rounds. Two hundred stories. Countless disputes."},
+    300:{title:"300. Three Hundred.",sub:"You people play a LOT of cards. The leaderboard now has real weight."},
+    400:{title:"400 Games",sub:"At this point, card night is a core memory."},
+    500:{title:"500 GAMES 🌟",sub:"Half a thousand. Certified card night legends, all of you."},
+    750:{title:"750 Games",sub:"Okay. Who's going to write the book?"},
+    1000:{title:"1000. ONE THOUSAND.",sub:"A milestone that shouldn't exist. And yet here we are."},
+  }[n]||{title:`${n} Games!`,sub:"Another milestone in the books."};
+  showEgg({emoji:tier.emoji,title:messages.title,sub:messages.sub+` · ${tier.name}`});
+  // Trigger confetti-like celebration
+  triggerMilestoneConfetti();
+}
+
+function triggerMilestoneConfetti(){
+  const emojis=["🃏","♠️","♥️","♦️","♣️","🎉","👑"];
+  for(let i=0;i<24;i++){
+    setTimeout(()=>{
+      const el=document.createElement("div");
+      el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${16+Math.random()*16}px;z-index:550;pointer-events:none;animation:poopRain ${1.5+Math.random()*1.5}s ease forwards;animation-delay:${Math.random()*0.4}s;opacity:0`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),3500);
+    },i*60);
+  }
+}
+
+function showTierInfo(){
+  const count=state.matches.filter(m=>!isRejected(m)).length;
+  const tier=currentTier();
+  const nextTier=TIERS.find(t=>t.min>count);
+  const toGo=nextTier?nextTier.min-count:0;
+  const sub=nextTier
+    ? `${count} games logged. ${toGo} more until ${nextTier.emoji} ${nextTier.name}.`
+    : `${count} games logged. You've reached the top tier. Keep going anyway.`;
+  showEgg({emoji:tier.emoji,title:tier.name,sub});
+}
 
 const isAdmin=()=>currentUser&&currentUser.toLowerCase()===ADMIN.toLowerCase();
 
@@ -728,6 +1048,30 @@ function showEgg(egg){
 }
 function closeEgg(){document.getElementById("egg-overlay").classList.remove("show");}
 
+// ── Champion roast (crown tap easter egg) ─────
+function roastChampion(){
+  const valid=state.matches.filter(m=>!isRejected(m));
+  const last=valid[0];
+  if(!last)return;
+  const champ=displayName(last.winner);
+  const isYou=last.winner===currentUser;
+  const selfRoasts=[
+    {emoji:"🪞",title:"Yes, it was you.",sub:`You won at ${last.game}. Do you want a trophy? A biscuit? Validation?`},
+    {emoji:"🫡",title:"Salute, champion.",sub:`You saw the crown. You tapped the crown. The crown is you. This is happening.`},
+    {emoji:"🎖️",title:"Decorated.",sub:`${last.game} champion. In this household. Today. That's the whole qualification.`},
+  ];
+  const roasts=[
+    {emoji:"🎭",title:`${champ}?`,sub:`They won ${last.game} once. Anyone can win once. Even ${champ}, apparently.`},
+    {emoji:"😒",title:"This is the bar?",sub:`${champ} is our reigning champion. Everyone should feel slightly worse about themselves.`},
+    {emoji:"🎲",title:"Luck, mostly.",sub:`${champ} won at ${champ=="Aiman"?"somehow":last.game}. The dice were kind. The cards were merciful. Respect the variance.`},
+    {emoji:"👑",title:"Long live the king.",sub:`${champ} reigns. It won't last. It never does.`},
+    {emoji:"🪦",title:"Enjoy it.",sub:`${champ}'s championship has a shelf life measured in minutes.`},
+  ];
+  const pool=isYou?selfRoasts:roasts;
+  const dayKey=Math.floor(Date.now()/60000); // changes every minute for variety
+  showEgg(pool[dayKey%pool.length]);
+}
+
 // ── Poop rain for unsigned ────────────────────
 function triggerPoopRain(){
   for(let i=0;i<12;i++){
@@ -745,32 +1089,18 @@ function triggerPoopRain(){
 }
 
 // ── DB ────────────────────────────────────────
-const EMPTY_STATE={players:[],matches:[],posts:[],profiles:{},spots:{velvet:[],penalty:[]},theCode:{signatories:[]}};
+const EMPTY_STATE={players:[],matches:[],posts:[],profiles:{},spots:{velvet:[],couch:[],penalty:[]},theCode:{signatories:[]}};
 
 async function dbLoad(){
   if(useSupabase()){
     const res=await fetch(`${SUPABASE_URL}/rest/v1/gamenight?id=eq.main&select=data`,{
       headers:{"apikey":SUPABASE_KEY,"Authorization":`Bearer ${SUPABASE_KEY}`}
     });
-    if(!res.ok){
-      const errText=await res.text().catch(()=>"");
-      throw new Error(`Supabase fetch failed: ${res.status} ${res.statusText}. ${errText.slice(0,120)}`);
-    }
     const rows=await res.json();
-    if(!rows||!rows.length){
-      // Row doesn't exist yet — create it so future saves work
-      const initRes=await fetch(`${SUPABASE_URL}/rest/v1/gamenight`,{
-        method:"POST",
-        headers:{"apikey":SUPABASE_KEY,"Authorization":`Bearer ${SUPABASE_KEY}`,"Content-Type":"application/json","Prefer":"return=minimal"},
-        body:JSON.stringify({id:"main",data:JSON.parse(JSON.stringify(EMPTY_STATE)),updated_at:new Date().toISOString()})
-      });
-      // If insert fails (e.g. row already exists from race), that's OK — just return empty state
-      return JSON.parse(JSON.stringify(EMPTY_STATE));
-    }
+    if(!rows||!rows.length)return JSON.parse(JSON.stringify(EMPTY_STATE));
     const d=rows[0].data;
-    if(!d||typeof d!=="object")return JSON.parse(JSON.stringify(EMPTY_STATE));
     if(!d.profiles)d.profiles={};
-    if(!d.spots)d.spots={velvet:[],penalty:[]};
+    if(!d.spots)d.spots={velvet:[],couch:[],penalty:[]};
     if(!d.theCode)d.theCode={signatories:[]};
     return d;
   }
@@ -779,14 +1109,14 @@ async function dbLoad(){
     const data=await res.json();
     const r=data.record;
     if(!r.profiles)r.profiles={};
-    if(!r.spots)r.spots={velvet:[],penalty:[]};
+    if(!r.spots)r.spots={velvet:[],couch:[],penalty:[]};
     if(!r.theCode)r.theCode={signatories:[]};
     return r;
   }
   const s=localStorage.getItem("kabbu_data");
   const d=s?JSON.parse(s):JSON.parse(JSON.stringify(EMPTY_STATE));
   if(!d.profiles)d.profiles={};
-  if(!d.spots)d.spots={velvet:[],penalty:[]};
+  if(!d.spots)d.spots={velvet:[],couch:[],penalty:[]};
   if(!d.theCode)d.theCode={signatories:[]};
   return d;
 }
@@ -849,7 +1179,13 @@ function avatarHTML(playerKey,size=36){
 function tagHTML(game){return`<span class="tag tag-${game}"><span class="tag-dot"></span>${game}</span>`;}
 
 // ── Helpers ───────────────────────────────────
-function calcStreak(playerKey){let n=0;for(const m of state.matches){if(m.winner===playerKey)n++;else break;}return n;}
+function calcStreak(playerKey){let n=0;for(const m of state.matches){if(isRejected(m))continue;const winners=[m.winner,...(Array.isArray(m.teammates)?m.teammates:[])];if(winners.includes(playerKey))n++;else break;}return n;}
+function isRejected(m){
+  if(!m||!m.verifications)return false;
+  const disputeCount=Object.values(m.verifications).filter(v=>v===false).length;
+  return disputeCount>=3;
+}
+function matchWinners(m){return[m.winner,...(Array.isArray(m.teammates)?m.teammates:[])];}
 function hasSigned(playerKey){return(state.theCode?.signatories||[]).includes(playerKey);}
 function countPendingVerify(){
   return state.matches.filter(m=>{
@@ -882,9 +1218,11 @@ function closeCodeModal(){document.getElementById("code-modal").classList.remove
 
 // ── Player Profile Modal ──────────────────────
 function openPlayerModal(playerKey){
+  if(!playerKey)return;
   const p=state.profiles?.[playerKey]||{};
-  const wins=state.matches.filter(m=>m.winner===playerKey).length;
-  const games=state.matches.filter(m=>m.winner===playerKey||(m.players||[]).includes(playerKey)).length;
+  const validMatches=state.matches.filter(m=>!isRejected(m));
+  const wins=validMatches.filter(m=>matchWinners(m).includes(playerKey)).length;
+  const games=validMatches.filter(m=>matchWinners(m).includes(playerKey)||(m.players||[]).includes(playerKey)).length;
   const streak=calcStreak(playerKey);
   const winRate=games>0?Math.round((wins/games)*100):0;
   // Avatar
@@ -903,6 +1241,94 @@ function openPlayerModal(playerKey){
     <div class="stat-box"><div class="stat-val" style="font-size:22px">${wins}</div><div class="stat-lbl">Wins</div></div>
     <div class="stat-box"><div class="stat-val" style="font-size:22px;color:var(--text2)">${games}</div><div class="stat-lbl">Games</div></div>
     <div class="stat-box"><div class="stat-val" style="font-size:22px;color:#fb923c">${streak>0?`${streak}🔥`:winRate+"%"}</div><div class="stat-lbl">${streak>0?"Streak":"Win %"}</div></div>`;
+
+  // ── H2H widget ──
+  const h2hEl=document.getElementById("player-modal-h2h");
+  if(h2hEl){
+    if(playerKey===currentUser){
+      // Looking at your own profile — show overall nemesis & favorite victim
+      const lossesTo={},winsOver={};
+      validMatches.forEach(m=>{
+        const winners=matchWinners(m);
+        const allPlayers=[...winners,...(m.players||[])];
+        if(!allPlayers.includes(currentUser))return;
+        if(winners.includes(currentUser)){
+          // currentUser won — count each loser as a victim
+          (m.players||[]).forEach(l=>{if(l!==currentUser)winsOver[l]=(winsOver[l]||0)+1;});
+        } else {
+          // currentUser lost — count each winner as tormentor
+          winners.forEach(w=>{if(w!==currentUser)lossesTo[w]=(lossesTo[w]||0)+1;});
+        }
+      });
+      const nemesis=Object.entries(lossesTo).sort((a,b)=>b[1]-a[1])[0];
+      const victim=Object.entries(winsOver).sort((a,b)=>b[1]-a[1])[0];
+      let html="";
+      if(nemesis&&nemesis[1]>=2){
+        const wOver=winsOver[nemesis[0]]||0;
+        html+=`<div style="display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:6px">
+          <span style="font-size:18px;flex-shrink:0">⚔️</span>
+          <div style="flex:1;min-width:0"><div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif">Top Nemesis</div>
+          <div style="font-size:13px;color:var(--text);font-weight:700;font-family:'Syne',sans-serif">${displayName(nemesis[0])}</div></div>
+          <div style="text-align:right;font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:var(--red)">${wOver}–${nemesis[1]}</div>
+        </div>`;
+      }
+      if(victim&&victim[1]>=2&&(!nemesis||victim[0]!==nemesis[0])){
+        const lTo=lossesTo[victim[0]]||0;
+        html+=`<div style="display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px">
+          <span style="font-size:18px;flex-shrink:0">🎯</span>
+          <div style="flex:1;min-width:0"><div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif">Favorite Victim</div>
+          <div style="font-size:13px;color:var(--text);font-weight:700;font-family:'Syne',sans-serif">${displayName(victim[0])}</div></div>
+          <div style="text-align:right;font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:var(--green-hi)">${victim[1]}–${lTo}</div>
+        </div>`;
+      }
+      h2hEl.innerHTML=html?`<div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif;margin:12px 0 8px">Rivalries</div>${html}`:"";
+    } else if(currentUser){
+      // Looking at someone else's profile — show H2H vs you
+      let theirWinsOverYou=0, yourWinsOverThem=0;
+      validMatches.forEach(m=>{
+        const winners=matchWinners(m);
+        const allPlayers=[...winners,...(m.players||[])];
+        const bothIn=allPlayers.includes(currentUser)&&allPlayers.includes(playerKey);
+        if(!bothIn)return;
+        if(winners.includes(playerKey)&&!winners.includes(currentUser))theirWinsOverYou++;
+        else if(winners.includes(currentUser)&&!winners.includes(playerKey))yourWinsOverThem++;
+      });
+      const total=theirWinsOverYou+yourWinsOverThem;
+      if(total>=2){
+        const youLead=yourWinsOverThem>theirWinsOverYou;
+        const tied=yourWinsOverThem===theirWinsOverYou;
+        let flavor="";
+        if(tied)flavor="Dead even. Someone needs to break the tie.";
+        else if(youLead){
+          const lead=yourWinsOverThem-theirWinsOverYou;
+          flavor=lead>=5?"You own them. Keep the boot on.":lead>=3?"You're clearly better at this.":"You're ahead, but it's close.";
+        } else {
+          const lead=theirWinsOverYou-yourWinsOverThem;
+          flavor=lead>=5?"They own you. Something to think about.":lead>=3?"They've got your number.":"You're behind. Time to step up.";
+        }
+        h2hEl.innerHTML=`
+          <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif;margin:12px 0 8px">Head to Head vs You</div>
+          <div style="background:${tied?"var(--bg2)":youLead?"linear-gradient(135deg,#1a2a1a,var(--bg2))":"linear-gradient(135deg,#2a1515,var(--bg2))"};border:1px solid ${tied?"var(--border)":youLead?"#2d6b47":"#5a2d2d"};border-radius:12px;padding:14px">
+            <div style="display:flex;align-items:center;justify-content:space-around;margin-bottom:8px">
+              <div style="text-align:center;flex:1">
+                <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;font-family:'Syne',sans-serif;margin-bottom:2px">You</div>
+                <div style="font-size:28px;font-weight:800;font-family:'Syne',sans-serif;color:${youLead?"var(--green-hi)":tied?"var(--text)":"var(--muted)"};letter-spacing:-0.02em">${yourWinsOverThem}</div>
+              </div>
+              <div style="font-size:13px;color:var(--dim);font-weight:800;font-family:'Syne',sans-serif">VS</div>
+              <div style="text-align:center;flex:1">
+                <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;font-family:'Syne',sans-serif;margin-bottom:2px">${displayName(playerKey)}</div>
+                <div style="font-size:28px;font-weight:800;font-family:'Syne',sans-serif;color:${!youLead&&!tied?"var(--red)":tied?"var(--text)":"var(--muted)"};letter-spacing:-0.02em">${theirWinsOverYou}</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--muted);font-weight:500;text-align:center;font-style:italic">${flavor}</div>
+          </div>`;
+      } else {
+        h2hEl.innerHTML="";
+      }
+    } else {
+      h2hEl.innerHTML="";
+    }
+  }
   document.getElementById("player-modal").classList.add("open");
 }
 function closePlayerModal(){document.getElementById("player-modal").classList.remove("open");}
@@ -945,7 +1371,14 @@ function renderActivityFeed(){
       action:p.text?`<div style="font-size:12px;color:var(--muted);margin-top:4px;font-style:italic">"${p.text.slice(0,60)}${p.text.length>60?"…":""}"</div>`:""
     });
   });
-
+  // Check if unsigned
+  if(!hasSigned(currentUser)){
+    activities.push({
+      emoji:"📜",
+      text:`You haven't signed <strong style="color:var(--text)">The Code</strong> yet`,
+      action:`<button onclick="setTab('profile')" style="margin-top:6px;background:var(--green);border:none;border-radius:99px;padding:4px 12px;color:#fff;font-size:11px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer">Sign it →</button>`
+    });
+  }
   const section=document.getElementById("activity-section");
   const list=document.getElementById("activity-list");
   if(!activities.length){section.style.display="none";return;}
@@ -962,16 +1395,13 @@ function renderActivityFeed(){
 
 // ── Init ──────────────────────────────────────
 async function loadApp(){
-  let fetchFailed=false;
   try{
     state=await dbLoad();
   }catch(e){
-    fetchFailed=true;
-    // Try localStorage cache before giving up
-    try{
-      const cached=localStorage.getItem("kabbu_data");
-      state=cached?JSON.parse(cached):JSON.parse(JSON.stringify(EMPTY_STATE));
-    }catch(x){state=JSON.parse(JSON.stringify(EMPTY_STATE));}
+    console.error("DB load failed:",e);
+    // Clear potentially corrupt localStorage and start fresh
+    try{localStorage.removeItem("kabbu_data");}catch(x){}
+    state=JSON.parse(JSON.stringify(EMPTY_STATE));
   }
   // Ensure state is always valid
   if(!state||typeof state!=="object")state=JSON.parse(JSON.stringify(EMPTY_STATE));
@@ -979,8 +1409,13 @@ async function loadApp(){
   if(!Array.isArray(state.matches))state.matches=[];
   if(!Array.isArray(state.posts))state.posts=[];
   if(!state.profiles)state.profiles={};
-  if(!state.spots)state.spots={velvet:[],penalty:[]};
+  if(!state.spots)state.spots={velvet:[],couch:[],penalty:[]};
+  if(!Array.isArray(state.spots.velvet))state.spots.velvet=[];
+  if(!Array.isArray(state.spots.couch))state.spots.couch=[];
+  if(!Array.isArray(state.spots.penalty))state.spots.penalty=[];
   if(!state.theCode)state.theCode={signatories:[]};
+
+  applyTierClass();
 
   document.getElementById("loading-screen").style.display="none";
   document.getElementById("app").style.display="block";
@@ -995,30 +1430,43 @@ async function loadApp(){
   });
   const saved=sessionStorage.getItem("kabbu_user");
   const validSaved=saved&&saved!=="null"&&saved!=="undefined"&&saved.trim()!=="";
-  // Allow login if: player exists in state, OR fetch failed (don't lock them out on network error)
-  if(validSaved&&(state.players.includes(saved)||fetchFailed)){
-    if(!state.players.includes(saved))state.players.push(saved);
+  if(validSaved){
     currentUser=saved;
+    // Add back to players list if somehow missing (e.g. after DB reset)
+    if(!state.players.includes(saved)){
+      state.players.push(saved);
+    }
     showMain();
-    if(fetchFailed)setTimeout(()=>showToast("⚠️","Connection issue","Could not reach server. Check Supabase."),800);
   }else{
-    sessionStorage.removeItem("kabbu_user");
-    currentUser=null;
     showSelectUser();
-    if(fetchFailed)setTimeout(()=>showToast("⚠️","Connection issue","Could not reach server. Try refreshing."),800);
   }
 }
 
 // ── Screens ───────────────────────────────────
 function showSelectUser(){document.getElementById("screen-selectuser").style.display="flex";document.getElementById("main-app").style.display="none";renderPlayerList();}
 function showMain(){
-  if(!currentUser){showSelectUser();return;}
+  if(!currentUser){console.error("showMain called with no currentUser");showSelectUser();return;}
   document.getElementById("screen-selectuser").style.display="none";
   document.getElementById("main-app").style.display="block";
   try{refreshAll();}catch(e){console.error("refreshAll failed:",e);}
   setTab("home");
+  // Offer to resume an in-progress session if one exists for this user
+  setTimeout(()=>{
+    const saved=loadSessionFromStorage();
+    if(saved && !currentSession){
+      const mins=Math.round((Date.now()-saved.startedAt)/60000);
+      const roundCount=(saved.rounds||[]).length;
+      const ageText=mins<60?`${mins} min${mins!==1?"s":""} ago`:`${Math.round(mins/60)}h ago`;
+      if(confirm(`Resume your ${saved.game} session from ${ageText}?\n\n${roundCount} round${roundCount!==1?"s":""} logged · ${saved.players.length} players\n\nCancel to discard.`)){
+        currentSession=saved;
+        setTab("log");
+      } else {
+        clearSessionFromStorage();
+      }
+    }
+  },500);
 }
-function switchUser(){currentUser=null;sessionStorage.removeItem("kabbu_user");showSelectUser();}
+function switchUser(){currentUser=null;sessionStorage.removeItem("kabbu_user");currentSession=null;showSelectUser();}
 
 // ── Player list ───────────────────────────────
 function renderPlayerList(){
@@ -1083,14 +1531,12 @@ function confirmPin(){
   if(!/^\d+$/.test(pin)){err.textContent="Numbers only.";err.style.display="block";return;}
   const pins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
   if(!pins[pinTarget]){
+    // Brand new PIN = brand new player, send to profile setup
     pins[pinTarget]=pin;localStorage.setItem("kabbu_pins",JSON.stringify(pins));
-    currentUser=pinTarget;sessionStorage.setItem("kabbu_user",pinTarget);closePinModal();
-    showMain();
+    closePinModal();currentUser=pinTarget;sessionStorage.setItem("kabbu_user",pinTarget);showMain();
   }else if(pins[pinTarget]===pin){
-    const welcomeName=pinTarget;
-    currentUser=pinTarget;sessionStorage.setItem("kabbu_user",pinTarget);closePinModal();
-    showMain();
-    if(welcomeName&&welcomeName!=="null")setTimeout(()=>showToast("👋","Welcome back",`${welcomeName} is in the building`),600);
+    closePinModal();currentUser=pinTarget;sessionStorage.setItem("kabbu_user",pinTarget);showMain();
+    if(pinTarget&&pinTarget!=="null")setTimeout(()=>showToast("👋","Welcome back",`${pinTarget} is in the building`),600);
   }else{
     err.textContent="Wrong PIN. Try again.";err.style.display="block";
     document.getElementById("pin-input").value="";
@@ -1137,18 +1583,20 @@ function renderProfile(){
   const badge=document.getElementById("profile-code-badge");
   badge.innerHTML=hasSigned(currentUser)?'<span class="code-signed">🛡️ Signed The Code</span>':'';
   setAvatarEl(document.getElementById("profile-avatar-big"),currentUser);
-  const wins=state.matches.filter(m=>m.winner===currentUser).length;
-  const games=state.matches.filter(m=>m.winner===currentUser||(m.players||[]).includes(currentUser)).length;
+  const validMatches=state.matches.filter(m=>!isRejected(m));
+  const wins=validMatches.filter(m=>matchWinners(m).includes(currentUser)).length;
+  const games=validMatches.filter(m=>matchWinners(m).includes(currentUser)||(m.players||[]).includes(currentUser)).length;
   const streak=calcStreak(currentUser);
   const winRate=games>0?Math.round((wins/games)*100):0;
   document.getElementById("ps-wins").textContent=wins;
   document.getElementById("ps-games").textContent=games;
   document.getElementById("ps-rate").textContent=games>0?`${winRate}%`:"—";
   document.getElementById("ps-streak").textContent=streak>0?`${streak}🔥`:0;
-  // Top rival — who beats you most
+  // Top rival — who beats you most (ignore rejected matches and your team's wins)
   const lossesTo={};
-  state.matches.forEach(m=>{
-    if((m.players||[]).includes(currentUser)&&m.winner!==currentUser){
+  validMatches.forEach(m=>{
+    const winners=matchWinners(m);
+    if((m.players||[]).includes(currentUser)&&!winners.includes(currentUser)){
       lossesTo[m.winner]=(lossesTo[m.winner]||0)+1;
     }
   });
@@ -1217,6 +1665,25 @@ async function adminDeleteMatch(idx){
   state.matches.splice(idx,1);await dbSave(state);renderHome();
 }
 
+async function adminUnrejectMatch(idx){
+  if(!isAdmin())return;
+  const m=state.matches[idx];
+  if(!m)return;
+  if(!confirm("Clear all disputes on this match and restore it to the leaderboard?\n\nUse this if disputes were cast in error."))return;
+  // Convert all disputes to approvals so the match is no longer rejected
+  // but keep a trail so we know admin intervened
+  if(!m.verifications)m.verifications={};
+  Object.keys(m.verifications).forEach(k=>{
+    if(m.verifications[k]===false)m.verifications[k]=true;
+  });
+  m.adminRestored=true;
+  m.adminRestoredBy=currentUser;
+  m.adminRestoredAt=Date.now();
+  await dbSave(state);
+  renderHome();
+  showToast("↶","Match restored","Disputes cleared. Match is back on the leaderboard.");
+}
+
 let adminPlayersOpen=false;
 function toggleAdminPlayers(){
   adminPlayersOpen=!adminPlayersOpen;
@@ -1241,6 +1708,54 @@ async function adminDeletePlayer(idx){
   adminPlayersOpen=false;
   renderProfile();
   showToast("🗑","Player removed",`${name} has been removed from the roster.`);
+}
+
+// ── Easter Egg Legend (admin only) ────────────
+let eggLegendOpen=false;
+function toggleEggLegend(){
+  if(!isAdmin())return;
+  eggLegendOpen=!eggLegendOpen;
+  const el=document.getElementById("egg-legend");
+  const btn=document.getElementById("egg-legend-btn");
+  if(!eggLegendOpen){
+    el.style.display="none";
+    el.innerHTML="";
+    btn.textContent="Show All Secrets";
+    return;
+  }
+  btn.textContent="Hide Secrets";
+  el.style.display="block";
+  const bannerEggs=EASTER_EGGS.map(egg=>`
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:flex-start;gap:10px">
+      <span style="font-size:20px;flex-shrink:0">${egg.emoji}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);letter-spacing:-0.01em">${egg.title}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4;font-weight:500">${egg.hint||"(no hint)"}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:4px;font-style:italic;font-weight:500">Triggers: ${egg.triggers.map(t=>`"${t}"`).join(", ")}</div>
+      </div>
+    </div>`).join("");
+  // Non-text eggs (tap/action-based)
+  const actionEggs=[
+    {emoji:"🃏",title:"Easy There",hint:"Tap the title 3× on the splash screen",sub:'"That\'s aggressive. Just make sure you don\'t damage the cards."'},
+    {emoji:"👑",title:"Champion Roast",hint:"Tap the 👑 Last Champion bar on Home",sub:"Randomized roast. Different pool when you're the reigning champion."},
+    {emoji:"📍",title:"The Spots (Secret Panel)",hint:"Long-press the app title (1+ second)",sub:"Opens a dedicated Spots archive view. Also available as a main tab."},
+    {emoji:"💩",title:"Poop Rain",hint:"Post in Banter without signing The Code",sub:"Automatic. Shame rains from the heavens."},
+  ];
+  const actionEggsHTML=actionEggs.map(egg=>`
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:flex-start;gap:10px">
+      <span style="font-size:20px;flex-shrink:0">${egg.emoji}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);letter-spacing:-0.01em">${egg.title}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4;font-weight:500">${egg.hint}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:4px;font-style:italic;font-weight:500">${egg.sub}</div>
+      </div>
+    </div>`).join("");
+  el.innerHTML=`
+    <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif;margin:4px 0 8px">Actions &amp; Taps</div>
+    ${actionEggsHTML}
+    <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif;margin:12px 0 8px">Banter Text Triggers (${EASTER_EGGS.length})</div>
+    ${bannerEggs}
+    <p style="font-size:11px;color:var(--dim);text-align:center;line-height:1.5;margin-top:10px;font-style:italic">Don't ruin it for the others. Half the fun is finding them.</p>`;
 }
 
 // ── Export / Import ───────────────────────────
@@ -1274,7 +1789,7 @@ async function importData(e){
     }
     state=data;
     if(!state.profiles)state.profiles={};
-    if(!state.spots)state.spots={velvet:[],penalty:[]};
+    if(!state.spots)state.spots={velvet:[],couch:[],penalty:[]};
     if(!state.theCode)state.theCode={signatories:[]};
     if(!state.posts)state.posts=[];
     await dbSave(state);
@@ -1297,14 +1812,18 @@ function toggleAccordion(type){
 
 function renderSpotsTab(){
   const velvet=state.spots?.velvet||[];
+  const couch=state.spots?.couch||[];
   const penalty=state.spots?.penalty||[];
   // Update counts in accordion headers
   const vc=document.getElementById("velvet-count");
+  const cc=document.getElementById("couch-count");
   const pc=document.getElementById("penalty-count");
   if(vc)vc.textContent=velvet.length?`${velvet.length} premier spot${velvet.length!==1?"s":""}  ›`:"Premier spots";
+  if(cc)cc.textContent=couch.length?`${couch.length} mid-tier spot${couch.length!==1?"s":""}  ›`:"Mid-tier — they'll do";
   if(pc)pc.textContent=penalty.length?`${penalty.length} sentenced spot${penalty.length!==1?"s":""}  ›`:"Failed the vibe check";
 
   const vEl=document.getElementById("tab-velvet-list");
+  const cEl=document.getElementById("tab-couch-list");
   const pEl=document.getElementById("tab-penalty-list");
   vEl.innerHTML=velvet.length?velvet.map((s,i)=>`
     <div class="spot-card-velvet" style="margin-bottom:8px">
@@ -1319,6 +1838,19 @@ function renderSpotsTab(){
       </div>
       ${isAdmin()?`<button onclick="deleteSpotTab('velvet',${i})" class="admin-del">🗑</button>`:""}
     </div>`).join(""):'<div class="empty" style="padding:16px 0;font-size:13px">No premier spots yet — nominate one!</div>';
+  if(cEl)cEl.innerHTML=couch.length?couch.map((s,i)=>`
+    <div class="spot-card-couch" style="margin-bottom:8px">
+      <span style="font-size:16px;margin-top:2px;flex-shrink:0">🛋️</span>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:14px;font-weight:700;color:var(--text);font-family:'Syne',sans-serif">${s.name}</span>
+          <a href="https://maps.google.com/?q=${encodeURIComponent(s.name)}" target="_blank" style="font-size:10px;color:#d4a574;font-weight:700;font-family:'Syne',sans-serif;text-decoration:none;background:rgba(212,165,116,0.15);border-radius:99px;padding:2px 8px;white-space:nowrap">📍 Maps</a>
+        </div>
+        ${s.desc?`<div style="font-size:12px;color:var(--muted);margin-top:3px;font-weight:500;line-height:1.5">${s.desc}</div>`:""}
+        <div style="font-size:10px;color:var(--dim);margin-top:4px;font-weight:500">Added by ${displayName(s.addedBy)||s.addedBy||"someone"}</div>
+      </div>
+      ${isAdmin()?`<button onclick="deleteSpotTab('couch',${i})" class="admin-del">🗑</button>`:""}
+    </div>`).join(""):'<div class="empty" style="padding:16px 0;font-size:13px">Nothing in the middle yet.</div>';
   pEl.innerHTML=penalty.length?penalty.map((s,i)=>`
     <div class="spot-card-penalty" style="margin-bottom:8px">
       <span style="font-size:16px;margin-top:2px;flex-shrink:0">🚽</span>
@@ -1345,7 +1877,7 @@ async function addSpotTab(type){
   const name=document.getElementById(`tab-${type}-name`).value.trim();
   const desc=document.getElementById(`tab-${type}-desc`).value.trim();
   if(!name)return;
-  if(!state.spots)state.spots={velvet:[],penalty:[]};
+  if(!state.spots)state.spots={velvet:[],couch:[],penalty:[]};
   state.spots[type].push({name,desc,addedBy:currentUser,ts:Date.now()});
   await dbSave(state);
   document.getElementById(`tab-${type}-name`).value="";
@@ -1367,8 +1899,10 @@ function closeSecretPanel(){document.getElementById("secret-panel").classList.re
 
 function renderSpots(){
   const velvet=state.spots?.velvet||[];
+  const couch=state.spots?.couch||[];
   const penalty=state.spots?.penalty||[];
   const vEl=document.getElementById("velvet-list");
+  const cEl=document.getElementById("couch-list");
   const pEl=document.getElementById("penalty-list");
   vEl.innerHTML=velvet.length?velvet.map((s,i)=>`
     <div class="spot-card-velvet">
@@ -1379,6 +1913,15 @@ function renderSpots(){
       </div>
       ${isAdmin()?`<button onclick="deleteSpot('velvet',${i})" class="admin-del">🗑</button>`:""}
     </div>`).join(""):'<div class="empty" style="padding:20px 0;font-size:13px">No premier spots yet.</div>';
+  if(cEl)cEl.innerHTML=couch.length?couch.map((s,i)=>`
+    <div class="spot-card-couch">
+      <span style="font-size:20px;margin-top:2px">🛋️</span>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:700;color:var(--text);font-family:'Syne',sans-serif">${s.name}</div>
+        ${s.desc?`<div style="font-size:12px;color:var(--muted);margin-top:3px;font-weight:500;line-height:1.5">${s.desc}</div>`:""}
+      </div>
+      ${isAdmin()?`<button onclick="deleteSpot('couch',${i})" class="admin-del">🗑</button>`:""}
+    </div>`).join(""):'<div class="empty" style="padding:20px 0;font-size:13px">Nothing in the middle yet.</div>';
   pEl.innerHTML=penalty.length?penalty.map((s,i)=>`
     <div class="spot-card-penalty">
       <span style="font-size:20px;margin-top:2px">🚽</span>
@@ -1399,7 +1942,7 @@ async function addSpot(type){
   const name=document.getElementById(`${type}-name`).value.trim();
   const desc=document.getElementById(`${type}-desc`).value.trim();
   if(!name)return;
-  if(!state.spots)state.spots={velvet:[],penalty:[]};
+  if(!state.spots)state.spots={velvet:[],couch:[],penalty:[]};
   state.spots[type].push({name,desc,addedBy:currentUser,ts:Date.now()});
   await dbSave(state);
   document.getElementById(`${type}-name`).value="";
@@ -1440,104 +1983,294 @@ function setTab(name){
   if(name==="spots")renderSpotsTab();
 }
 async function refreshState(){try{state=await dbLoad();}catch(e){}}
-function refreshAll(){if(!currentUser)return;renderHome();renderLeaders();renderLog();renderChat();if(currentTab==="profile")renderProfile();if(currentTab==="spots")renderSpotsTab();updateBadges();}
+function refreshAll(){renderHome();renderLeaders();renderLog();renderChat();if(currentTab==="profile")renderProfile();if(currentTab==="spots")renderSpotsTab();updateBadges();}
+
+// Per-page refresh with visual feedback
+async function refreshThisTab(event){
+  const btn=event&&event.currentTarget;
+  if(btn)btn.classList.add("spinning");
+  await refreshState();
+  // Only re-render the active tab for speed
+  if(currentTab==="home")renderHome();
+  else if(currentTab==="leaders")renderLeaders();
+  else if(currentTab==="chat")renderChat();
+  else if(currentTab==="spots")renderSpotsTab();
+  updateBadges();
+  setTimeout(()=>{if(btn)btn.classList.remove("spinning");},700);
+}
 
 // ── Home ──────────────────────────────────────
 function renderHome(){
+  applyTierClass();
+  checkMilestoneCelebration();
   const name=currentUser||(sessionStorage.getItem("kabbu_user")||"");
   const homeUser=document.getElementById("home-username");
   if(homeUser)homeUser.textContent=name;
+  // Tier badge — tappable to show tier info
+  const tierBadge=document.getElementById("tier-badge-home");
+  const tier=currentTier();
+  if(tierBadge){
+    tierBadge.innerHTML=`<span class="tier-badge" onclick="showTierInfo()" title="Group tier">${tier.emoji} ${tier.name}</span>`;
+  }
   setAvatarEl(document.getElementById("home-avatar"),currentUser);
   setAvatarEl(document.getElementById("nav-profile-avatar"),currentUser);
-  const myWins=state.matches.filter(m=>m.winner===currentUser);
+  const validMatches=state.matches.filter(m=>!isRejected(m));
+  const myWins=validMatches.filter(m=>matchWinners(m).includes(currentUser));
   const gw={};myWins.forEach(m=>{gw[m.game]=(gw[m.game]||0)+1;});
   const top=Object.entries(gw).sort((a,b)=>b[1]-a[1])[0];
   const stTotal=document.getElementById("stat-total");
   const stWins=document.getElementById("stat-wins");
   const stGame=document.getElementById("stat-game");
-  if(stTotal)stTotal.textContent=state.matches.length;
+  if(stTotal)stTotal.textContent=validMatches.length;
   if(stWins)stWins.textContent=myWins.length;
-  if(stGame)stGame.textContent=top?top[0].slice(0,3):"—";
+  if(stGame){
+    if(top){
+      // Shorten only the really long names to keep grid aligned
+      const short={"Sequence":"Sequence","President":"Pres.","Backgammon":"Backgm.","Kabbu":"Kabbu","Chess":"Chess","Other":"Other"}[top[0]]||top[0];
+      stGame.textContent=short;
+    } else {
+      stGame.textContent="—";
+    }
+  }
   const cb=document.getElementById("champion-bar");
   if(cb){
-    if(state.matches.length>0){
-      const last=state.matches[0];
+    const last=validMatches[0];
+    if(last){
       const cn=document.getElementById("champion-name");
-      if(cn)cn.textContent=`${displayName(last.winner)} · ${last.game}`;
+      const winners=matchWinners(last);
+      if(cn)cn.textContent=`${winners.map(displayName).join(" & ")} · ${last.game}`;
       cb.style.display="flex";
     }else cb.style.display="none";
   }
   updateBadges();
   renderActivityFeed();
   const el=document.getElementById("recent-matches");
-  const recent=state.matches.slice(0,15);
-  const MATCH_RXNS=["🔥","💀","👑","💩","🤬","😤"];
-  if(!recent.length){el.innerHTML='<div class="empty">No matches yet. Log your first win! 🃏</div>';return;}
-  el.innerHTML=recent.map((m,i)=>{
-    const mine=m.winner===currentUser;
-    const tagged=(m.players||[]).includes(currentUser);
+  // Show newer matches first; default cap is 5, expandable to all
+  const allMatches=state.matches;
+  const cap=state.__showAllMatches?allMatches.length:5;
+  const recent=allMatches.slice(0,cap);
+  if(!allMatches.length){el.innerHTML='<div class="empty">No matches yet. Log your first win! 🃏</div>';return;}
+  const cards=recent.map((m,i)=>{
+    const teammates=Array.isArray(m.teammates)?m.teammates:[];
+    const allWinners=[m.winner,...teammates];
+    const mine=allWinners.includes(currentUser);
+    const tagged=(m.players||[]).includes(currentUser)||teammates.includes(currentUser);
     const verifs=m.verifications||{};
     const verifyCount=(m.players||[]).filter(p=>verifs[p]===true).length;
-    const disputed=Object.values(verifs).some(v=>v===false);
+    const disputeCount=(m.players||[]).filter(p=>verifs[p]===false).length;
+    const rejected=disputeCount>=3; // 3+ disputes = match rejected
     const myVerif=verifs[currentUser];
     let badge="";
-    if(!mine&&tagged&&myVerif===undefined)badge=`<button onclick="openVerifyModal(${i})" class="verify-badge verify-pending">Verify?</button>`;
-    else if(disputed)badge=`<span class="verify-badge verify-disputed">⚠ Disputed</span>`;
+    if(rejected){
+      badge=`<span class="verify-badge verify-disputed" title="3+ disputes — excluded from leaderboard">🚫 Rejected</span>`;
+      if(isAdmin())badge+=` <button onclick="event.stopPropagation();adminUnrejectMatch(${i})" style="background:#1a3a2a;border:1px solid #2d6b47;border-radius:99px;padding:2px 8px;font-size:10px;color:var(--green-hi);font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.04em;cursor:pointer" title="Admin: restore match">↶ UNDO</button>`;
+    }
+    else if(!mine&&tagged&&myVerif===undefined)badge=`<button onclick="openVerifyModal(${i})" class="verify-badge verify-pending">Verify?</button>`;
+    else if(disputeCount>0)badge=`<span class="verify-badge verify-disputed">⚠ ${disputeCount} dispute${disputeCount>1?"s":""}</span>`;
     else if(verifyCount>0)badge=`<span class="verify-badge verify-approved">✓ ${verifyCount} verified</span>`;
     const streak=calcStreak(m.winner);
-    const streakBadge=streak>=3?`<span class="streak">🔥${streak}</span>`:"";
+    const streakBadge=streak>=3&&!rejected?`<span class="streak">🔥${streak}</span>`:"";
     const adminBtn=isAdmin()?`<button class="admin-del" onclick="adminDeleteMatch(${i})" title="Delete match">🗑</button>`:"";
-    const dn=displayName(m.winner);
-    // Match reactions — use emoji index to avoid emoji in onclick attributes
-    const rxns=m.reactions||{};
-    const rxnBar=MATCH_RXNS.map((e,ei)=>{
-      const users=rxns[e]||[];
-      const mine2=users.includes(currentUser);
-      if(users.length===0)return`<button onclick="addMatchReaction(${i},${ei})" style="background:none;border:1px solid var(--border2);border-radius:99px;padding:2px 7px;font-size:11px;cursor:pointer;opacity:0.5;transition:opacity 0.15s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">${e}</button>`;
-      return`<button onclick="addMatchReaction(${i},${ei})" style="background:${mine2?"rgba(201,137,58,0.2)":"var(--bg3)"};border:1px solid ${mine2?"var(--green)":"var(--border2)"};border-radius:99px;padding:2px 7px;font-size:11px;cursor:pointer">${e} <span style="font-size:10px;color:var(--muted)">${users.length}</span></button>`;
-    }).join("");
-    return`<div class="card" style="border-color:${mine?"#3a2d18":"var(--border2)"};margin-bottom:8px">
+    // Winner name(s) — clickable, with subtle indicator
+    const winnerHTML=teammates.length
+      ? `<span onclick="openPlayerModal('${m.winner.replace(/'/g,"\\'")}')" class="clickable-name" style="cursor:pointer">${displayName(m.winner)}</span> <span style="font-size:10px;color:var(--muted);font-weight:600">+</span> ${teammates.map(t=>`<span onclick="openPlayerModal('${t.replace(/'/g,"\\'")}')" class="clickable-name" style="cursor:pointer">${displayName(t)}</span>`).join(" <span style='color:var(--muted)'>&amp;</span> ")}`
+      : `<span onclick="openPlayerModal('${m.winner.replace(/'/g,"\\'")}')" class="clickable-name" style="cursor:pointer">${displayName(m.winner)}</span>`;
+    const teamBadge=teammates.length?`<span style="font-size:9px;background:rgba(96,165,250,0.15);color:#60a5fa;border-radius:99px;padding:2px 7px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.04em">TEAM</span>`:"";
+    return`<div class="card" style="border-color:${rejected?"#5a2d2d":mine?"#3a2d18":"var(--border2)"};margin-bottom:8px;opacity:${rejected?"0.55":"1"}">
       <div style="display:flex;align-items:center;gap:12px">
-        <div onclick="openPlayerModal('${m.winner}')" style="cursor:pointer">${avatarHTML(m.winner,38)}</div>
+        <div onclick="openPlayerModal('${m.winner.replace(/'/g,"\\'")}')" style="cursor:pointer">${avatarHTML(m.winner,38)}</div>
         <div style="flex:1;min-width:0">
-          <div style="font-weight:700;color:var(--text2);font-size:14px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-family:'Syne',sans-serif">
-            ${dn} ${streakBadge}
-            ${mine?'<span style="font-size:9px;background:rgba(201,137,58,0.2);color:var(--green-hi);border-radius:99px;padding:2px 7px;font-weight:800;font-family:\'Syne\',sans-serif;letter-spacing:0.04em">YOU</span>':""}
+          <div style="font-weight:700;color:var(--text2);font-size:14px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-family:'Syne',sans-serif;${rejected?"text-decoration:line-through;text-decoration-color:rgba(224,112,112,0.5)":""}">
+            ${winnerHTML} ${teamBadge} ${streakBadge}
+            ${mine&&!teammates.length?'<span style="font-size:9px;background:rgba(201,137,58,0.2);color:var(--green-hi);border-radius:99px;padding:2px 7px;font-weight:800;font-family:\'Syne\',sans-serif;letter-spacing:0.04em">YOU</span>':""}
             ${badge}
           </div>
           ${m.notes?`<div style="font-size:12px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500">${m.notes}</div>`:""}
-          <div style="font-size:11px;color:var(--dim);margin-top:3px;font-weight:500">${m.date}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:3px;font-weight:500">${m.date}${m.sessionId?` · <span style="color:var(--muted)">Session</span>`:""}</div>
         </div>
         <div style="display:flex;align-items:center;gap:4px">${tagHTML(m.game)}${adminBtn}</div>
       </div>
-      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px">${rxnBar}</div>
     </div>`;
   }).join("");
+  const toggleBtn=allMatches.length>5
+    ? `<button onclick="toggleShowAllMatches()" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:11px;color:var(--muted);font-size:12px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.04em;margin-top:4px">${state.__showAllMatches?`SHOW LESS ↑`:`SHOW ALL ${allMatches.length} MATCHES ↓`}</button>`
+    : "";
+  el.innerHTML=cards+toggleBtn;
 }
 
-async function addMatchReaction(matchIndex, emojiIndex){
-  const emoji=["🔥","💀","👑","💩","🖕","😤"][emojiIndex];
-  if(!state.matches[matchIndex].reactions)state.matches[matchIndex].reactions={};
-  const users=state.matches[matchIndex].reactions[emoji]||[];
-  const idx=users.indexOf(currentUser);
-  if(idx>-1)users.splice(idx,1);else users.push(currentUser);
-  state.matches[matchIndex].reactions[emoji]=users;
-  await dbSave(state);
+function toggleShowAllMatches(){
+  state.__showAllMatches=!state.__showAllMatches;
   renderHome();
 }
 
-// ── Leaderboard ───────────────────────────────
+// ── Leaderboard Spice ─────────────────────────
+// Computes rivalries, streaks, and other juicy stats to show above the leaderboard.
+function computeSpice(){
+  const valid=state.matches.filter(m=>!isRejected(m));
+  if(valid.length<3)return [];
+  const cards=[];
+
+  // 1. BEEF — biggest head-to-head imbalance
+  // For every pair (A, B), count wins A over B and wins B over A in games where both played
+  const h2h={};
+  valid.forEach(m=>{
+    const winners=matchWinners(m);
+    const losers=(m.players||[]).filter(p=>!winners.includes(p));
+    winners.forEach(w=>{
+      losers.forEach(l=>{
+        const key=w<l?`${w}|${l}`:`${l}|${w}`;
+        if(!h2h[key])h2h[key]={};
+        h2h[key][w]=(h2h[key][w]||0)+1;
+      });
+    });
+  });
+  let topBeef=null;
+  Object.entries(h2h).forEach(([key,counts])=>{
+    const [a,b]=key.split("|");
+    const aw=counts[a]||0;
+    const bw=counts[b]||0;
+    const total=aw+bw;
+    const lead=Math.abs(aw-bw);
+    // Interesting if lead is 3+ AND total is 4+ (so we don't flag a 3-0)
+    if(lead>=3 && total>=4){
+      const score=lead*2+total; // prioritize big leads with enough data
+      if(!topBeef||score>topBeef.score){
+        const winner=aw>bw?a:b;
+        const loser=aw>bw?b:a;
+        const winCount=Math.max(aw,bw);
+        const lossCount=Math.min(aw,bw);
+        topBeef={winner,loser,winCount,lossCount,score};
+      }
+    }
+  });
+  if(topBeef){
+    const taunts=[
+      `<strong>${displayName(topBeef.winner)}</strong> has beaten <strong>${displayName(topBeef.loser)}</strong> ${topBeef.winCount}–${topBeef.lossCount}. <em style="color:var(--muted)">This is embarrassing now.</em>`,
+      `<strong>${displayName(topBeef.loser)}</strong> is ${topBeef.lossCount}–${topBeef.winCount} against <strong>${displayName(topBeef.winner)}</strong>. <em style="color:var(--muted)">Maybe pick a different opponent?</em>`,
+      `<strong>${displayName(topBeef.winner)}</strong> owns <strong>${displayName(topBeef.loser)}</strong> (${topBeef.winCount}–${topBeef.lossCount}). <em style="color:var(--muted)">The gap grows.</em>`,
+    ];
+    // Deterministic taunt per day so it doesn't change every refresh
+    const dayKey=Math.floor(Date.now()/86400000);
+    const taunt=taunts[dayKey%taunts.length];
+    cards.push({type:"beef",header:"⚔️ The Beef",body:taunt});
+  }
+
+  // 2. HOT STREAK — who's on a tear
+  const playerStreaks={};
+  state.players.forEach(p=>{playerStreaks[p]=calcStreak(p);});
+  const topStreak=Object.entries(playerStreaks)
+    .filter(([,s])=>s>=3)
+    .sort((a,b)=>b[1]-a[1])[0];
+  if(topStreak){
+    const [pk,streakN]=topStreak;
+    cards.push({
+      type:"achievement",
+      header:"🔥 Heater",
+      body:`<strong>${displayName(pk)}</strong> is on a <strong>${streakN}-win streak</strong>. Somebody stop them. Please.`
+    });
+  }
+
+  // 3. DRY SPELL — player with most recent losses without winning
+  const lossStreaks={};
+  state.players.forEach(p=>{lossStreaks[p]=0;});
+  // Walk matches in order (newest first), count consecutive losses for each player
+  const seen=new Set();
+  for(const m of valid){
+    const winners=matchWinners(m);
+    // Record a win ends the streak — if we haven't seen them yet, they got their last result here
+    winners.forEach(w=>{
+      if(!seen.has(w))seen.add(w); // their most recent result was a win; streak is 0
+    });
+    (m.players||[]).forEach(p=>{
+      if(!seen.has(p)){
+        lossStreaks[p]=(lossStreaks[p]||0)+1;
+      }
+    });
+  }
+  const topLoser=Object.entries(lossStreaks)
+    .filter(([p,l])=>l>=4 && state.players.includes(p))
+    .sort((a,b)=>b[1]-a[1])[0];
+  if(topLoser && (!topStreak || topLoser[0]!==topStreak[0])){
+    const [pk,lossN]=topLoser;
+    cards.push({
+      type:"beef",
+      header:"💀 Cold",
+      body:`<strong>${displayName(pk)}</strong> has lost <strong>${lossN}</strong> in a row. <em style="color:var(--muted)">Maybe sit the next one out?</em>`
+    });
+  }
+
+  // 4. GAME KING — who dominates a specific game (if leaderFilter is All, highlight a specialist)
+  if(leaderFilter==="All"){
+    const gameWinners={};
+    valid.forEach(m=>{
+      if(!gameWinners[m.game])gameWinners[m.game]={};
+      matchWinners(m).forEach(w=>{
+        gameWinners[m.game][w]=(gameWinners[m.game][w]||0)+1;
+      });
+    });
+    // Find game with most-dominant single player (highest % of wins)
+    let topKing=null;
+    Object.entries(gameWinners).forEach(([game,counts])=>{
+      const total=Object.values(counts).reduce((a,b)=>a+b,0);
+      if(total<4)return;
+      const [pk,wins]=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+      const pct=wins/total;
+      if(pct>=0.5 && wins>=3){
+        const score=pct*10+wins;
+        if(!topKing||score>topKing.score)topKing={game,pk,wins,total,pct,score};
+      }
+    });
+    if(topKing){
+      cards.push({
+        type:"stat",
+        header:"👑 Specialist",
+        body:`<strong>${displayName(topKing.pk)}</strong> has won <strong>${topKing.wins} of ${topKing.total}</strong> <strong>${topKing.game}</strong> games (${Math.round(topKing.pct*100)}%).`
+      });
+    }
+  }
+
+  // 5. TOTAL MATCHES MILESTONE
+  const totalMilestones=[50,100,150,200,300,500];
+  const nextMilestone=totalMilestones.find(m=>valid.length<m);
+  if(nextMilestone && nextMilestone-valid.length<=5){
+    cards.push({
+      type:"stat",
+      header:"📊 Countdown",
+      body:`<strong>${nextMilestone-valid.length}</strong> matches until the ${nextMilestone}-game milestone. Who gets the honours?`
+    });
+  }
+
+  // Cap at 3 cards max so it doesn't dominate the page
+  return cards.slice(0,3);
+}
+
+function renderLeaderboardSpice(){
+  const el=document.getElementById("leader-spice");
+  if(!el)return;
+  const cards=computeSpice();
+  if(!cards.length){el.innerHTML="";return;}
+  el.innerHTML=cards.map(c=>`
+    <div class="spice-card spice-${c.type}">
+      <div class="spice-header">${c.header}</div>
+      <div class="spice-body">${c.body}</div>
+    </div>`).join("");
+}
 function renderLeaders(){
+  renderLeaderboardSpice();
   // Sync dropdown to current filter
   const sel=document.getElementById("leader-filter-select");
   if(sel)sel.value=leaderFilter;
-  const filtered=leaderFilter==="All"?state.matches:state.matches.filter(m=>m.game===leaderFilter);
+  const filtered=(leaderFilter==="All"?state.matches:state.matches.filter(m=>m.game===leaderFilter))
+    .filter(m=>!isRejected(m));
   const winMap={};
   state.players.forEach(p=>{winMap[p]={total:0};GAMES.forEach(g=>{winMap[p][g]=0;});});
   filtered.forEach(m=>{
-    if(!winMap[m.winner]){winMap[m.winner]={total:0};GAMES.forEach(g=>{winMap[m.winner][g]=0;});}
-    winMap[m.winner].total++;
-    if(winMap[m.winner][m.game]!==undefined)winMap[m.winner][m.game]++;
+    const winners=matchWinners(m);
+    winners.forEach(w=>{
+      if(!winMap[w]){winMap[w]={total:0};GAMES.forEach(g=>{winMap[w][g]=0;});}
+      winMap[w].total++;
+      if(winMap[w][m.game]!==undefined)winMap[w][m.game]++;
+    });
   });
   const sorted=Object.entries(winMap).sort((a,b)=>b[1].total-a[1].total);
   const medals=["🥇","🥈","🥉"];
@@ -1548,7 +2281,7 @@ function renderLeaders(){
     const bio=state.profiles?.[pk]?.bio||"";
     const signBadge=hasSigned(pk)?'<span style="font-size:11px" title="Signed The Code">🛡️</span>':"";
     const isTop=i===0&&stats.total>0;
-    return`<div onclick="openPlayerModal('${pk}')" style="background:${isTop?"linear-gradient(135deg,#2a1e0a,var(--bg2))":"var(--bg2)"};border:1px solid ${isTop?"#5a3d1a":"var(--border)"};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;transition:opacity 0.15s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+    return`<div onclick="openPlayerModal('${pk.replace(/'/g,"\\'")}')" style="background:${isTop?"linear-gradient(135deg,#2a1e0a,var(--bg2))":"var(--bg2)"};border:1px solid ${isTop?"#5a3d1a":"var(--border)"};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;transition:opacity 0.15s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
       <div style="font-size:20px;width:28px;text-align:center">${i<3&&stats.total>0?medals[i]:`<span style="font-size:12px;color:var(--dim);font-weight:800;font-family:'Syne',sans-serif">#${i+1}</span>`}</div>
       ${avatarHTML(pk,38)}
       <div style="flex:1;min-width:0">
@@ -1567,65 +2300,371 @@ function renderLeaders(){
 function setLeaderFilter(g){leaderFilter=g;renderLeaders();}
 
 // ── Log ───────────────────────────────────────
-let logListenersAttached=false;
+// ── Log state ─────────────────────────────────
+let logMode="single"; // "single" | "session"
+let teamWinOn=false;
+let currentSession=null; // {game, players:[], rounds:[matchIndex,...], startedAt}
+
+// ── Session persistence ───────────────────────
+const SESSION_KEY="kabbu_session";
+function saveSessionToStorage(){
+  try{
+    if(currentSession)localStorage.setItem(SESSION_KEY,JSON.stringify({...currentSession,savedFor:currentUser}));
+    else localStorage.removeItem(SESSION_KEY);
+  }catch(e){}
+}
+function loadSessionFromStorage(){
+  try{
+    const raw=localStorage.getItem(SESSION_KEY);
+    if(!raw)return null;
+    const s=JSON.parse(raw);
+    // Only restore sessions belonging to the current user and less than 12 hours old
+    if(!s||!s.game||!s.players||!s.startedAt)return null;
+    if(s.savedFor && s.savedFor!==currentUser)return null;
+    if(Date.now()-s.startedAt > 12*60*60*1000)return null;
+    delete s.savedFor;
+    return s;
+  }catch(e){return null;}
+}
+function clearSessionFromStorage(){try{localStorage.removeItem(SESSION_KEY);}catch(e){}}
+
+function setLogMode(mode){
+  logMode=mode;
+  document.getElementById("mode-tab-single").classList.toggle("active",mode==="single");
+  document.getElementById("mode-tab-session").classList.toggle("active",mode==="session");
+  const single=document.getElementById("log-form");
+  const sessionSetup=document.getElementById("session-setup");
+  const sessionLive=document.getElementById("session-live");
+  const success=document.getElementById("log-success");
+  if(success)success.style.display="none";
+  if(mode==="single"){
+    single.style.display="block";
+    sessionSetup.style.display="none";
+    sessionLive.style.display="none";
+    return;
+  }
+  single.style.display="none";
+  if(currentSession){
+    sessionSetup.style.display="none";
+    sessionLive.style.display="block";
+    renderSessionLive();
+  } else {
+    sessionSetup.style.display="block";
+    sessionLive.style.display="none";
+    renderSessionSetup();
+  }
+}
+
 function renderLog(){
+  // Reset to single mode on entry unless a session is active
+  if(currentSession){setLogMode("session");return;}
+  setLogMode("single");
   const sel=document.getElementById("log-winner");
   if(!sel)return;
-  sel.innerHTML='<option value="">Select winner…</option>'+(state.players||[]).filter(p=>p&&p!=="null").map(p=>`<option value="${p}">${p}</option>`).join("");
+  const validPlayers=(state.players||[]).filter(p=>p&&p!=="null");
+  sel.innerHTML='<option value="">Select winner…</option>'+validPlayers.map(p=>`<option value="${p}">${p}</option>`).join("");
   sel.value=currentUser||"";
-  if(!logListenersAttached){
-    logListenersAttached=true;
-    document.getElementById("log-game").addEventListener("change",()=>{renderLogPlayers();updateLogPreview();});
-    document.getElementById("log-winner").addEventListener("change",()=>{renderLogPlayers();updateLogPreview();});
-  }
-  renderLogPlayers();updateLogPreview();
+  const tm=document.getElementById("log-teammate");
+  if(tm)tm.innerHTML='<option value="">Select teammate…</option>'+validPlayers.map(p=>`<option value="${p}">${p}</option>`).join("");
+  renderLogPlayers();
+  updateLogPreview();
   const ls=document.getElementById("log-success");
-  const lf=document.getElementById("log-form");
   if(ls)ls.style.display="none";
-  if(lf)lf.style.display="block";
 }
+
+function toggleTeamWin(){
+  teamWinOn=!teamWinOn;
+  const tog=document.getElementById("log-team-toggle");
+  const icon=document.getElementById("tt-check-icon");
+  const tmWrap=document.getElementById("log-teammate-wrap");
+  const label=document.getElementById("log-winner-label");
+  tog.classList.toggle("active",teamWinOn);
+  if(icon)icon.style.display=teamWinOn?"block":"none";
+  if(tmWrap)tmWrap.style.display=teamWinOn?"block":"none";
+  if(label)label.textContent=teamWinOn?"Winner 1 *":"Winner *";
+  renderLogPlayers();
+  updateLogPreview();
+}
+
 function renderLogPlayers(){
   const winner=document.getElementById("log-winner").value||currentUser;
-  const others=state.players.filter(p=>p!==winner);
+  const tmSel=document.getElementById("log-teammate");
+  const teammate=teamWinOn&&tmSel?tmSel.value:"";
+  // Exclude winner AND teammate from "other players" list
+  const exclude=new Set([winner,teammate].filter(Boolean));
+  const others=state.players.filter(p=>p&&p!=="null"&&!exclude.has(p));
+  // Also rebuild teammate dropdown so winner is excluded from it
+  if(tmSel){
+    const prev=tmSel.value;
+    const opts=state.players.filter(p=>p&&p!=="null"&&p!==winner);
+    tmSel.innerHTML='<option value="">Select teammate…</option>'+opts.map(p=>`<option value="${p}">${p}</option>`).join("");
+    if(opts.includes(prev))tmSel.value=prev;
+  }
   document.getElementById("log-players-list").innerHTML=others.length
     ?others.map(p=>`<label class="player-check" onclick="toggleCheck(this)"><input type="checkbox" value="${p}" onchange="updateLogPreview()"/>${avatarHTML(p,28)}<span style="font-size:14px;color:var(--text2);font-weight:500">${displayName(p)}</span></label>`).join("")
     :`<div style="font-size:13px;color:var(--dim);padding:10px 0;font-weight:500">No other players yet.</div>`;
 }
+
 function toggleCheck(label){const cb=label.querySelector("input");cb.checked=!cb.checked;label.classList.toggle("selected",cb.checked);updateLogPreview();}
 function getCheckedPlayers(){return Array.from(document.querySelectorAll("#log-players-list input:checked")).map(i=>i.value);}
+
 function updateLogPreview(){
-  const game=document.getElementById("log-game").value,winnerKey=document.getElementById("log-winner").value,tagged=getCheckedPlayers();
-  const ready=game&&winnerKey&&tagged.length>0;
+  const game=document.getElementById("log-game").value;
+  const winnerKey=document.getElementById("log-winner").value;
+  const teammate=teamWinOn?(document.getElementById("log-teammate")||{}).value:"";
+  const tagged=getCheckedPlayers();
+  // Show/hide team toggle based on game
+  const ttWrap=document.getElementById("log-team-toggle-wrap");
+  if(ttWrap){
+    const showTeam=game==="Sequence";
+    ttWrap.style.display=showTeam?"block":"none";
+    // Turn team win OFF automatically if game changes to non-Sequence
+    if(!showTeam&&teamWinOn){teamWinOn=false;
+      document.getElementById("log-team-toggle").classList.remove("active");
+      const icon=document.getElementById("tt-check-icon");if(icon)icon.style.display="none";
+      document.getElementById("log-teammate-wrap").style.display="none";
+      document.getElementById("log-winner-label").textContent="Winner *";
+    }
+  }
+  const ready=game&&winnerKey&&tagged.length>0&&(!teamWinOn||teammate);
   const btn=document.getElementById("log-submit"),prev=document.getElementById("log-preview");
   btn.disabled=!ready;btn.style.background=ready?"var(--green)":"var(--bg3)";btn.style.color=ready?"#fff":"var(--dim)";
-  if(ready){prev.style.display="flex";prev.innerHTML=`${tagHTML(game)}<span style="color:var(--dim);font-size:13px">→</span><span style="font-weight:700;color:var(--text2);font-size:14px;font-family:'Syne',sans-serif">${displayName(winnerKey)}</span><span style="font-size:11px;color:var(--muted);font-weight:500">vs ${tagged.map(displayName).join(", ")}</span>`;}
+  if(ready){
+    prev.style.display="flex";
+    const winnerText=teamWinOn?`${displayName(winnerKey)} &amp; ${displayName(teammate)} <span style="font-size:9px;background:rgba(96,165,250,0.15);color:#60a5fa;border-radius:99px;padding:2px 7px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.04em;margin-left:4px">TEAM</span>`:displayName(winnerKey);
+    prev.innerHTML=`${tagHTML(game)}<span style="color:var(--dim);font-size:13px">→</span><span style="font-weight:700;color:var(--text2);font-size:14px;font-family:'Syne',sans-serif">${winnerText}</span><span style="font-size:11px;color:var(--muted);font-weight:500;width:100%;margin-top:2px">vs ${tagged.map(displayName).join(", ")}</span>`;
+  }
   else prev.style.display="none";
 }
-// These are attached at render time instead (see renderLog)
+
+document.getElementById("log-game").addEventListener("change",()=>{renderLogPlayers();updateLogPreview();});
+document.getElementById("log-winner").addEventListener("change",()=>{renderLogPlayers();updateLogPreview();});
+const tmEl=document.getElementById("log-teammate");
+if(tmEl)tmEl.addEventListener("change",()=>{renderLogPlayers();updateLogPreview();});
 
 async function logMatch(){
-  const game=document.getElementById("log-game").value,winner=document.getElementById("log-winner").value;
-  const notes=document.getElementById("log-notes").value.trim(),players=getCheckedPlayers();
+  const game=document.getElementById("log-game").value;
+  const winner=document.getElementById("log-winner").value;
+  const teammate=teamWinOn?(document.getElementById("log-teammate")||{}).value:"";
+  const notes=document.getElementById("log-notes").value.trim();
+  const players=getCheckedPlayers();
   if(!game||!winner||!players.length)return;
+  if(teamWinOn&&!teammate)return;
   const btn=document.getElementById("log-submit");btn.textContent="Saving…";btn.disabled=true;
-  state.matches.unshift({game,winner,notes,players,loggedBy:currentUser,verifications:{},
-    date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}),ts:Date.now()});
-  await dbSave(state);
+  const matchRecord={
+    game,winner,notes,players,loggedBy:currentUser,verifications:{},
+    date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}),
+    ts:Date.now()
+  };
+  if(teamWinOn&&teammate)matchRecord.teammates=[teammate];
+  state.matches.unshift(matchRecord);
+  try{
+    await dbSave(state);
+  }catch(e){
+    state.matches.shift();
+    btn.textContent="Save Match ✓";btn.disabled=false;
+    showToast("❌","Save failed",e.message||"Could not save match. Try again.");
+    return;
+  }
   document.getElementById("log-form").style.display="none";
   document.getElementById("log-success").style.display="flex";
-  document.getElementById("log-success-msg").textContent=`${displayName(winner)} wins at ${game}\nWaiting for ${players.map(displayName).join(", ")} to verify ✓`;
+  const winnerDisplay=teamWinOn?`${displayName(winner)} & ${displayName(teammate)}`:displayName(winner);
+  document.getElementById("log-success-msg").textContent=`${winnerDisplay} wins at ${game}\nWaiting for ${players.map(displayName).join(", ")} to verify ✓`;
   btn.textContent="Save Match ✓";
-  showToast("🃏","Match logged!",`${displayName(winner)} wins at ${game}`);
-  setTimeout(()=>{document.getElementById("log-success").style.display="none";document.getElementById("log-form").style.display="block";
-    document.getElementById("log-game").value="";document.getElementById("log-winner").value=currentUser||"";
-    document.getElementById("log-notes").value="";renderLogPlayers();updateLogPreview();setTab("home");},2400);
+  showToast("🃏","Match logged!",`${winnerDisplay} wins at ${game}`);
+  setTimeout(()=>{
+    document.getElementById("log-success").style.display="none";
+    document.getElementById("log-form").style.display="block";
+    document.getElementById("log-game").value="";
+    document.getElementById("log-winner").value=currentUser||"";
+    document.getElementById("log-notes").value="";
+    // Reset team win
+    if(teamWinOn)toggleTeamWin();
+    renderLogPlayers();updateLogPreview();
+    setTab("home");
+  },2400);
+}
+
+// ── Session Mode ──────────────────────────────
+function renderSessionSetup(){
+  // Game dropdown already static. Refresh player list.
+  const list=document.getElementById("session-players-list");
+  const validPlayers=(state.players||[]).filter(p=>p&&p!=="null");
+  list.innerHTML=validPlayers.length
+    ?validPlayers.map(p=>{
+      const selected=p===currentUser;
+      return`<label class="player-check ${selected?"selected":""}" onclick="toggleSessionPlayer(this)"><input type="checkbox" value="${p}" ${selected?"checked":""} onchange="updateSessionReady()"/>${avatarHTML(p,28)}<span style="font-size:14px;color:var(--text2);font-weight:500">${displayName(p)}</span></label>`;
+    }).join("")
+    :`<div style="font-size:13px;color:var(--dim);padding:10px 0;font-weight:500">No players yet.</div>`;
+  const gameSel=document.getElementById("session-game");
+  if(gameSel&&!gameSel.dataset.bound){
+    gameSel.dataset.bound="1";
+    gameSel.addEventListener("change",updateSessionReady);
+  }
+  updateSessionReady();
+}
+
+function toggleSessionPlayer(label){
+  const cb=label.querySelector("input");
+  cb.checked=!cb.checked;
+  label.classList.toggle("selected",cb.checked);
+  updateSessionReady();
+}
+
+function getSessionPlayers(){return Array.from(document.querySelectorAll("#session-players-list input:checked")).map(i=>i.value);}
+
+function updateSessionReady(){
+  const game=document.getElementById("session-game").value;
+  const players=getSessionPlayers();
+  const ready=game&&players.length>=2;
+  const btn=document.getElementById("session-start-btn");
+  btn.disabled=!ready;
+  btn.style.background=ready?"var(--green)":"var(--bg3)";
+  btn.style.color=ready?"#fff":"var(--dim)";
+}
+
+function startSession(){
+  const game=document.getElementById("session-game").value;
+  const players=getSessionPlayers();
+  if(!game||players.length<2)return;
+  currentSession={game,players,rounds:[],startedAt:Date.now()};
+  saveSessionToStorage();
+  document.getElementById("session-setup").style.display="none";
+  document.getElementById("session-live").style.display="block";
+  document.getElementById("session-game-label").textContent=game.toUpperCase();
+  renderSessionLive();
+  showToast("🎮","Session started",`${game} · ${players.length} players. Tap to log rounds.`);
+}
+
+function renderSessionLive(){
+  if(!currentSession)return;
+  document.getElementById("session-game-label").textContent=currentSession.game.toUpperCase();
+  // Tally per-player wins in this session
+  const tally={};
+  currentSession.players.forEach(p=>{tally[p]=0;});
+  currentSession.rounds.forEach(mIdx=>{
+    const m=state.matches.find(x=>x.ts===mIdx);
+    if(m&&tally[m.winner]!==undefined)tally[m.winner]++;
+  });
+  const maxWins=Math.max(0,...Object.values(tally));
+  // Render tappable player rows, sorted by wins desc then original order
+  const tallyEl=document.getElementById("session-tally");
+  tallyEl.innerHTML=currentSession.players
+    .map(p=>({p,wins:tally[p]}))
+    .sort((a,b)=>b.wins-a.wins||currentSession.players.indexOf(a.p)-currentSession.players.indexOf(b.p))
+    .map(({p,wins})=>{
+      const leading=wins>0&&wins===maxWins;
+      return`<div class="session-tally-row ${leading?"leading":""}" onclick="logSessionRound('${p.replace(/'/g,"\\'")}')">
+        ${avatarHTML(p,34)}
+        <div style="flex:1;font-weight:700;color:var(--text);font-size:14px;font-family:'Syne',sans-serif">${displayName(p)}${leading?' <span style="font-size:11px">👑</span>':""}</div>
+        <div class="session-tally-count" style="color:${leading?"var(--green-hi)":"var(--muted)"}">${wins}</div>
+      </div>`;
+    }).join("");
+  // History section
+  const histWrap=document.getElementById("session-history-wrap");
+  const hist=document.getElementById("session-history");
+  const count=document.getElementById("session-round-count");
+  if(currentSession.rounds.length===0){
+    histWrap.style.display="none";
+  } else {
+    histWrap.style.display="block";
+    count.textContent=`— ${currentSession.rounds.length} round${currentSession.rounds.length!==1?"s":""}`;
+    // Show most recent first, allow undo only on the last one
+    hist.innerHTML=currentSession.rounds.slice().reverse().map((ts,i)=>{
+      const m=state.matches.find(x=>x.ts===ts);
+      if(!m)return"";
+      const isLast=i===0;
+      const timeStr=new Date(ts).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+      return`<div class="session-history-row">
+        <span style="color:var(--text2);font-weight:700;font-family:'Syne',sans-serif">${displayName(m.winner)}</span>
+        <span style="color:var(--dim);font-size:10px">·</span>
+        <span style="color:var(--dim);font-size:11px">${timeStr}</span>
+        ${isLast?`<button class="session-undo-btn" onclick="undoSessionRound()">UNDO</button>`:""}
+      </div>`;
+    }).join("");
+  }
+}
+
+async function logSessionRound(winnerKey){
+  if(!currentSession)return;
+  if(!currentSession.players.includes(winnerKey))return;
+  const losers=currentSession.players.filter(p=>p!==winnerKey);
+  const matchRecord={
+    game:currentSession.game,
+    winner:winnerKey,
+    notes:"",
+    players:losers,
+    loggedBy:currentUser,
+    verifications:{},
+    date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}),
+    ts:Date.now(),
+    sessionId:currentSession.startedAt
+  };
+  state.matches.unshift(matchRecord);
+  currentSession.rounds.push(matchRecord.ts);
+  saveSessionToStorage();
+  renderSessionLive(); // optimistic render
+  try{
+    await dbSave(state);
+  }catch(e){
+    // Rollback optimistic update
+    state.matches.shift();
+    currentSession.rounds.pop();
+    saveSessionToStorage();
+    renderSessionLive();
+    showToast("❌","Save failed",e.message||"Could not save round. Try again.");
+    return;
+  }
+  showToast("✓",`${displayName(winnerKey)} wins`,`Round ${currentSession.rounds.length} logged.`);
+}
+
+async function undoSessionRound(){
+  if(!currentSession||currentSession.rounds.length===0)return;
+  if(!confirm("Undo the last round? It will be removed from records."))return;
+  const lastTs=currentSession.rounds[currentSession.rounds.length-1];
+  const idx=state.matches.findIndex(m=>m.ts===lastTs);
+  if(idx!==-1)state.matches.splice(idx,1);
+  currentSession.rounds.pop();
+  saveSessionToStorage();
+  renderSessionLive();
+  try{await dbSave(state);}catch(e){showToast("❌","Save failed","Change may not sync.");}
+}
+
+async function endSession(){
+  if(!currentSession)return;
+  const rounds=currentSession.rounds.length;
+  if(rounds===0){
+    if(!confirm("End session with 0 rounds logged?"))return;
+    currentSession=null;
+    clearSessionFromStorage();
+    setLogMode("session");
+    return;
+  }
+  // Tally final standings for toast
+  const tally={};
+  currentSession.players.forEach(p=>{tally[p]=0;});
+  currentSession.rounds.forEach(ts=>{
+    const m=state.matches.find(x=>x.ts===ts);
+    if(m&&tally[m.winner]!==undefined)tally[m.winner]++;
+  });
+  const top=Object.entries(tally).sort((a,b)=>b[1]-a[1]);
+  const summary=top.filter(([,w])=>w>0).map(([p,w])=>`${displayName(p)} ${w}`).join(" · ")||"No wins logged";
+  if(!confirm(`End this session?\n\n${rounds} round${rounds!==1?"s":""} logged:\n${summary}`))return;
+  currentSession=null;
+  clearSessionFromStorage();
+  showToast("🏁","Session ended",`${rounds} round${rounds!==1?"s":""} added to records.`);
+  setTab("home");
 }
 
 // ── Verify ────────────────────────────────────
 function openVerifyModal(idx){
   verifyTarget=idx;const m=state.matches[idx];
+  const teammates=Array.isArray(m.teammates)?m.teammates:[];
+  const winnerDisplay=teammates.length
+    ? `<strong style="color:var(--text)">${displayName(m.winner)} &amp; ${teammates.map(displayName).join(" &amp; ")}</strong> <span style="font-size:9px;background:rgba(96,165,250,0.15);color:#60a5fa;border-radius:99px;padding:2px 7px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.04em;margin-left:4px">TEAM</span>`
+    : `<strong style="color:var(--text)">${displayName(m.winner)}</strong>`;
   document.getElementById("verify-modal-sub").textContent=`Logged by ${displayName(m.loggedBy)} · ${m.date}`;
-  document.getElementById("verify-match-detail").innerHTML=`<strong style="color:var(--text)">${displayName(m.winner)}</strong> won at <strong style="color:var(--text)">${m.game}</strong><br>Players: ${[m.winner,...(m.players||[])].map(displayName).join(", ")}<br>${m.notes?`<em style="color:var(--muted)">"${m.notes}"</em>`:""}`;
+  document.getElementById("verify-match-detail").innerHTML=`${winnerDisplay} won at <strong style="color:var(--text)">${m.game}</strong><br>Players: ${[m.winner,...teammates,...(m.players||[])].map(displayName).join(", ")}<br>${m.notes?`<em style="color:var(--muted)">"${m.notes}"</em>`:""}`;
   document.getElementById("verify-modal").classList.add("open");
 }
 function closeVerifyModal(){document.getElementById("verify-modal").classList.remove("open");verifyTarget=null;}
@@ -1633,10 +2672,16 @@ async function castVerify(approved){
   if(verifyTarget===null)return;
   if(!state.matches[verifyTarget].verifications)state.matches[verifyTarget].verifications={};
   state.matches[verifyTarget].verifications[currentUser]=approved;
+  // Check if this just rejected the match
+  const justRejected=!approved && isRejected(state.matches[verifyTarget]);
   await dbSave(state);
   closeVerifyModal();
   renderHome();
-  showToast(approved?"✅":"⚠️", approved?"Confirmed!":"Disputed", approved?"Win verified — respect.":"You've disputed this win.");
+  if(justRejected){
+    showToast("🚫","Match rejected","3+ disputes — removed from leaderboard.",5000);
+  } else {
+    showToast(approved?"✅":"⚠️", approved?"Confirmed!":"Disputed", approved?"Win verified — respect.":"You've disputed this win.");
+  }
 }
 
 // ── Banter ────────────────────────────────────
@@ -1674,26 +2719,8 @@ function reactionsHTML(post,postIdx){
   return`<div class="rxn-row">${allBtns}</div>`;
 }
 
-let chatListenersAttached=false;
 function renderChat(){
   setAvatarEl(document.getElementById("chat-avatar"),currentUser);
-  // Sign The Code banner
-  const codeBar=document.getElementById("banter-code-bar");
-  if(codeBar){
-    if(!hasSigned(currentUser)){
-      codeBar.style.display="flex";
-    } else {
-      codeBar.style.display="none";
-    }
-  }
-  if(!chatListenersAttached){
-    const ci=document.getElementById("chat-input");
-    if(ci){
-      chatListenersAttached=true;
-      ci.addEventListener("input",updateChatBtn);
-      ci.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();postBanter();}});
-    }
-  }
   const validPosts=(state.posts||[]).filter(p=>p&&p.author&&p.author!=="null"&&p.author!=="undefined");
   const list=document.getElementById("banter-list");
   if(!validPosts.length){list.innerHTML='<div class="empty">No banter yet. Start something 👀</div>';return;}
@@ -1701,11 +2728,11 @@ function renderChat(){
     const unsigned=!hasSigned(p.author);
     const bsHeader=unsigned?`<div class="bs-banner">💩 Unverified Source · <span style="font-weight:500;color:var(--red);opacity:0.7">This person has not signed The Code</span></div>`:"";
     return`<div class="card ${unsigned?"bs-post":""}" style="display:flex;gap:12px;margin-bottom:10px;${unsigned?"border-color:var(--red-bdr)":""}">
-      ${avatarHTML(p.author,36)}
+      <div onclick="openPlayerModal('${p.author.replace(/'/g,"\\'")}')" style="cursor:pointer">${avatarHTML(p.author,36)}</div>
       <div style="flex:1;min-width:0">
         ${bsHeader}
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-          <span style="font-weight:800;color:var(--text);font-size:14px;font-family:'Syne',sans-serif">${p.author}</span>
+          <span onclick="openPlayerModal('${p.author.replace(/'/g,"\\'")}')" class="clickable-name" style="font-weight:800;color:var(--text);font-size:14px;font-family:'Syne',sans-serif;cursor:pointer">${p.author}</span>
           ${unsigned?'<span>💩</span>':""}
           <span style="font-size:11px;color:var(--dim);font-weight:500">${p.date}</span>
         </div>
@@ -1763,7 +2790,8 @@ document.getElementById("main-app").addEventListener("touchmove",e=>{if(e.touche
 document.getElementById("main-app").addEventListener("touchend",async()=>{if(ptrActive){ptrActive=false;await refreshState();refreshAll();setTimeout(()=>document.getElementById("ptr").classList.remove("show"),400);}},{passive:true});
 
 // ── Chat input listeners ──────────────────────
-// Chat listeners attached in renderChat to avoid null refs at script load time
+document.getElementById("chat-input").addEventListener("input",updateChatBtn);
+document.getElementById("chat-input").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();postBanter();}});
 
 // ── Swipe ─────────────────────────────────────
 const TAB_ORDER=["home","leaders","chat","spots","profile"];
