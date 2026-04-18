@@ -12,6 +12,7 @@
   <meta http-equiv="Expires" content="0"/>
   <title>Game Night</title>
   <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
   <link rel="apple-touch-icon" href="icon192.png"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -60,7 +61,8 @@
     .sp-suits span:nth-child(2){animation-delay:0.8s;color:#7a4040}
     .sp-suits span:nth-child(3){animation-delay:0.95s;color:#8a7055}
     .sp-suits span:nth-child(4){animation-delay:1.1s;color:#7a4040}
-    .sp-card{font-size:80px;margin-top:28px;animation:cardFloat 3s ease-in-out 1.3s infinite both,fadeIn 0.5s ease 1.3s both;filter:drop-shadow(0 8px 24px rgba(201,137,58,0.2))}
+    .sp-card{font-size:80px;margin-top:28px;animation:cardFloat 3s ease-in-out 1.3s infinite both,fadeIn 0.5s ease 1.3s both;filter:drop-shadow(0 8px 24px rgba(201,137,58,0.25))}
+    .sp-card img{width:120px;height:120px;object-fit:contain;display:block}
     .sp-hint{position:absolute;bottom:48px;font-size:9.5px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;font-family:'Syne',sans-serif;animation:pulse 2s ease 2.2s infinite both,fadeIn 0.5s ease 2.2s both;text-align:center;line-height:1.7;padding:0 28px}
     .sp-hint div{display:block}
     .sp-hint div:first-child{color:var(--green-hi);opacity:0.75;margin-bottom:2px}
@@ -300,7 +302,7 @@
   <div class="sp-eyebrow">Game Night</div>
   <div class="sp-title" id="sp-title-el">GAME NIGHT</div>
   <div class="sp-suits"><span>♠</span><span>♥</span><span>♦</span><span>♣</span></div>
-  <div class="sp-card">🃏</div>
+  <div class="sp-card"><img src="jester.png" alt="" onerror="this.parentElement.innerHTML='🃏';this.parentElement.style.fontSize='80px'"/></div>
   <div id="sp-tap-feedback" class="sp-tap-feedback"></div>
   <div class="sp-hint">
     <div>Tap the title 3× for a secret</div>
@@ -1144,7 +1146,7 @@ function triggerPoopRain(){
 }
 
 // ── DB ────────────────────────────────────────
-const EMPTY_STATE={players:[],matches:[],posts:[],profiles:{},spots:{velvet:[],couch:[],penalty:[]},theCode:{signatories:[]}};
+const EMPTY_STATE={players:[],matches:[],posts:[],profiles:{},spots:{velvet:[],couch:[],penalty:[]},theCode:{signatories:[]},pins:{}};
 
 async function dbLoad(){
   if(useSupabase()){
@@ -1157,6 +1159,7 @@ async function dbLoad(){
     if(!d.profiles)d.profiles={};
     if(!d.spots)d.spots={velvet:[],couch:[],penalty:[]};
     if(!d.theCode)d.theCode={signatories:[]};
+    if(!d.pins||typeof d.pins!=="object")d.pins={};
     return d;
   }
   if(BIN_ID!=="YOUR_BIN_ID_HERE"){
@@ -1166,6 +1169,7 @@ async function dbLoad(){
     if(!r.profiles)r.profiles={};
     if(!r.spots)r.spots={velvet:[],couch:[],penalty:[]};
     if(!r.theCode)r.theCode={signatories:[]};
+    if(!r.pins||typeof r.pins!=="object")r.pins={};
     return r;
   }
   const s=localStorage.getItem("kabbu_data");
@@ -1173,6 +1177,7 @@ async function dbLoad(){
   if(!d.profiles)d.profiles={};
   if(!d.spots)d.spots={velvet:[],couch:[],penalty:[]};
   if(!d.theCode)d.theCode={signatories:[]};
+  if(!d.pins||typeof d.pins!=="object")d.pins={};
   return d;
 }
 
@@ -1469,8 +1474,12 @@ async function loadApp(){
   if(!Array.isArray(state.spots.couch))state.spots.couch=[];
   if(!Array.isArray(state.spots.penalty))state.spots.penalty=[];
   if(!state.theCode)state.theCode={signatories:[]};
+  if(!state.pins||typeof state.pins!=="object")state.pins={};
 
   applyTierClass();
+
+  // Migrate local PINs to Supabase if needed, or cache remote PINs locally
+  migrateLocalPinsIfNeeded();
 
   document.getElementById("loading-screen").style.display="none";
   document.getElementById("app").style.display="block";
@@ -1562,9 +1571,56 @@ async function addPlayer(){
 }
 
 // ── PIN ───────────────────────────────────────
+// PINs live in state.pins (Supabase synced). localStorage is kept as a cache
+// so existing devices don't lose their PINs during the migration and so
+// offline-ish devices still work.
+function getPins(){
+  // Merge: localStorage overlays state.pins, so a just-set PIN that hasn't
+  // synced yet is still recognized.
+  let statePins={};
+  let localPins={};
+  try{ statePins=state.pins||{}; }catch(e){}
+  try{ localPins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}"); }catch(e){}
+  return {...statePins,...localPins};
+}
+async function setPinRemote(playerKey,pin){
+  // Write to both places: local (instant, works offline), state (synced)
+  try{
+    const lp=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
+    lp[playerKey]=pin;
+    localStorage.setItem("kabbu_pins",JSON.stringify(lp));
+  }catch(e){}
+  if(!state.pins)state.pins={};
+  state.pins[playerKey]=pin;
+  try{ await dbSave(state); }catch(e){
+    // PIN still works locally even if cloud save fails
+    console.warn("PIN saved locally but not synced:",e);
+  }
+}
+// One-time migration: if remote pins are empty but local has some, push local up
+async function migrateLocalPinsIfNeeded(){
+  try{
+    const localPins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
+    const remotePins=state.pins||{};
+    const localKeys=Object.keys(localPins);
+    const remoteKeys=Object.keys(remotePins);
+    // Only migrate if remote is empty AND local has entries
+    if(remoteKeys.length===0 && localKeys.length>0){
+      state.pins={...localPins};
+      await dbSave(state);
+      console.log("Migrated",localKeys.length,"local PIN(s) to Supabase");
+    } else if(remoteKeys.length>0 && localKeys.length===0){
+      // Fresh device with remote PINs — cache them locally for offline
+      localStorage.setItem("kabbu_pins",JSON.stringify(remotePins));
+    }
+  }catch(e){
+    console.warn("PIN migration skipped:",e);
+  }
+}
+
 function promptPin(playerKey){
   pinTarget=playerKey;
-  const pins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
+  const pins=getPins();
   document.getElementById("pin-input").value="";
   document.getElementById("pin-error").style.display="none";
   const dn=displayName(playerKey);
@@ -1579,18 +1635,18 @@ function onPinInput(el){
   if(el.value.length>4)el.value=el.value.slice(0,4);
   if(el.value.length===4)confirmPin();
 }
-function confirmPin(){
+async function confirmPin(){
   const pin=document.getElementById("pin-input").value.trim();
   const err=document.getElementById("pin-error");
   if(!pin||pin.length<4){err.textContent="PIN must be 4 digits.";err.style.display="block";return;}
   if(!/^\d+$/.test(pin)){err.textContent="Numbers only.";err.style.display="block";return;}
-  const pins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
+  const pins=getPins();
   // CRITICAL: capture pinTarget BEFORE closePinModal() which sets it to null
   const target=pinTarget;
   if(!target){err.textContent="Something went wrong. Tap your name again.";err.style.display="block";return;}
   if(!pins[target]){
-    // Brand new PIN = brand new player, send to profile setup
-    pins[target]=pin;localStorage.setItem("kabbu_pins",JSON.stringify(pins));
+    // Brand new PIN = brand new player. Save then enter.
+    await setPinRemote(target,pin);
     closePinModal();
     currentUser=target;
     sessionStorage.setItem("kabbu_user",target);
@@ -1713,9 +1769,14 @@ async function saveProfile(){
   if(!state.profiles[currentUser])state.profiles[currentUser]={};
   state.profiles[currentUser].bio=bio;
   if(newPin&&newPin.length===4&&/^\d+$/.test(newPin)){
-    const pins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
-    pins[currentUser]=newPin;
-    localStorage.setItem("kabbu_pins",JSON.stringify(pins));
+    // Write to both places so new PIN is usable across devices
+    if(!state.pins)state.pins={};
+    state.pins[currentUser]=newPin;
+    try{
+      const lp=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
+      lp[currentUser]=newPin;
+      localStorage.setItem("kabbu_pins",JSON.stringify(lp));
+    }catch(e){}
   }
   await dbSave(state);
   document.getElementById("profile-saved-msg").style.display="block";
@@ -1856,6 +1917,7 @@ async function importData(e){
     if(!state.spots)state.spots={velvet:[],couch:[],penalty:[]};
     if(!state.theCode)state.theCode={signatories:[]};
     if(!state.posts)state.posts=[];
+    if(!state.pins||typeof state.pins!=="object")state.pins={};
     await dbSave(state);
     refreshAll();
     showToast("✅","Restored!","Your backup has been loaded successfully.");
