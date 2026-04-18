@@ -265,6 +265,8 @@
     .spice-beef{background:linear-gradient(135deg,#2a1515 0%,#1a0e0e 100%);border:1px solid #5a2d2d}
     .spice-stat{background:linear-gradient(135deg,#1a1f2a 0%,#0e1118 100%);border:1px solid #2d3d5a}
     .spice-achievement{background:linear-gradient(135deg,#2a200a 0%,#1a1408 100%);border:1px solid #5a4018}
+    .spice-cold{background:linear-gradient(135deg,#0e1a2a 0%,#080f18 100%);border:1px solid #1e3a5a}
+    .spice-cold .spice-header{color:#93c5fd}
     .spice-beef .spice-header{color:#f87171}
     .spice-stat .spice-header{color:#60a5fa}
     .spice-achievement .spice-header{color:#fbbf24}
@@ -2377,7 +2379,7 @@ function computeSpice(){
   if(topLoser && (!topStreak || topLoser[0]!==topStreak[0])){
     const [pk,lossN]=topLoser;
     cards.push({
-      type:"beef",
+      type:"cold",
       header:"💀 Cold",
       body:`<strong>${displayName(pk)}</strong> has lost <strong>${lossN}</strong> in a row. <em style="color:var(--muted)">Maybe sit the next one out?</em>`
     });
