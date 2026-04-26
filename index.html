@@ -2915,9 +2915,11 @@ function renderChat(){
   list.innerHTML=validPosts.map((p,i)=>{
     const unsigned=!hasSigned(p.author);
     const bsHeader=unsigned?`<div class="bs-banner">💩 Unverified Source · <span style="font-weight:500;color:var(--red);opacity:0.7">This person has not signed The Code</span></div>`:"";
-    return`<div class="card ${unsigned?"bs-post":""}" style="display:flex;gap:12px;margin-bottom:10px;${unsigned?"border-color:var(--red-bdr)":""}">
+    const adminBtn=isAdmin()?`<button class="admin-del" onclick="adminDeletePost(${i})" title="Delete post" style="position:absolute;top:10px;right:10px">🗑</button>`:"";
+    return`<div class="card ${unsigned?"bs-post":""}" style="display:flex;gap:12px;margin-bottom:10px;position:relative;${unsigned?"border-color:var(--red-bdr)":""}">
+      ${adminBtn}
       <div onclick="openPlayerModal('${p.author.replace(/'/g,"\\'")}')" style="cursor:pointer">${avatarHTML(p.author,36)}</div>
-      <div style="flex:1;min-width:0">
+      <div style="flex:1;min-width:0;${isAdmin()?"padding-right:24px":""}">
         ${bsHeader}
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
           <span onclick="openPlayerModal('${p.author.replace(/'/g,"\\'")}')" class="clickable-name" style="font-weight:800;color:var(--text);font-size:14px;font-family:'Syne',sans-serif;cursor:pointer">${p.author}</span>
@@ -2930,7 +2932,26 @@ function renderChat(){
     </div>`;
   }).join("");
 }
-
+async function adminDeletePost(postIndex){
+  if(!isAdmin())return;
+  const validPosts=(state.posts||[]).filter(p=>p&&p.author&&p.author!=="null"&&p.author!=="undefined");
+  const post=validPosts[postIndex];
+  if(!post)return;
+  const preview=post.text?`"${post.text.slice(0,50)}${post.text.length>50?"…":""}"`:"this post";
+  if(!confirm(`Delete ${preview} by ${post.author}? Cannot be undone.`))return;
+  const realIndex=state.posts.indexOf(post);
+  if(realIndex===-1)return;
+  state.posts.splice(realIndex,1);
+  try{
+    await dbSave(state);
+    renderChat();
+    showToast("🗑","Post deleted",`Removed ${post.author}'s post.`);
+  }catch(e){
+    state.posts.splice(realIndex,0,post); // rollback
+    renderChat();
+    showToast("❌","Delete failed",e.message||"Could not save.");
+  }
+}
 // ── Chat button state ─────────────────────────
 function updateChatBtn(){
   const text=(document.getElementById("chat-input")||{}).value||"";
