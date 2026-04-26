@@ -12,7 +12,7 @@
   <meta http-equiv="Expires" content="0"/>
   <title>Game Night</title>
   <link rel="manifest" href="manifest.json"/>
-  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <link rel="apple-touch-icon" href="icon192.png"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/>
@@ -584,6 +584,7 @@
           placeholder="· · · ·" style="text-align:center;letter-spacing:0.3em;font-size:20px;padding:14px;font-family:'Syne',sans-serif;-moz-appearance:textfield"
           oninput="onPinInput(this)"/>
         <p id="pin-error" style="display:none;text-align:center;color:var(--red);font-size:12px;font-weight:600;margin:0;font-family:'Syne',sans-serif"></p>
+        <button type="button" id="pin-forgot-btn" onclick="forgotPin()" style="display:none;background:none;border:none;color:var(--muted);font-size:11px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.08em;text-transform:uppercase;padding:6px;cursor:pointer;text-decoration:underline">Forgot PIN?</button>
       </div>
     </div>
   </div>
@@ -1048,8 +1049,9 @@ function promptPin(playerKey){
   document.getElementById("pin-error").style.display="none";
   const dn=displayName(playerKey);
   const title=document.getElementById("pin-modal-title"),sub=document.getElementById("pin-modal-sub");
-  if(pins[playerKey]){title.textContent=`Welcome back, ${dn}`;sub.textContent="Enter your PIN";}
-  else{title.textContent=`Hey ${dn}!`;sub.textContent="Create a 4-digit PIN to protect your profile";}
+  const forgotBtn=document.getElementById("pin-forgot-btn");
+  if(pins[playerKey]){title.textContent=`Welcome back, ${dn}`;sub.textContent="Enter your PIN";if(forgotBtn)forgotBtn.style.display="block";}
+  else{title.textContent=`Hey ${dn}!`;sub.textContent="Create a 4-digit PIN to protect your profile";if(forgotBtn)forgotBtn.style.display="none";}
   document.getElementById("pin-modal").classList.add("open");
   setTimeout(()=>document.getElementById("pin-input").focus(),120);
 }
@@ -1072,10 +1074,24 @@ function confirmPin(){
     closePinModal();currentUser=pinTarget;sessionStorage.setItem("kabbu_user",pinTarget);showMain();
     if(pinTarget&&pinTarget!=="null")setTimeout(()=>showToast("👋","Welcome back",`${pinTarget} is in the building`),600);
   }else{
-    err.textContent="Wrong PIN. Try again.";err.style.display="block";
+    // Show a small diagnostic to help debug — what's stored vs what was entered
+    const storedLen=String(pins[pinTarget]||"").length;
+    err.innerHTML=`Wrong PIN. Try again.<br><span style="font-size:10px;opacity:0.7;font-weight:500;font-family:'DM Sans',sans-serif">(stored PIN is ${storedLen} digits, you typed ${pin.length})</span>`;
+    err.style.display="block";
     document.getElementById("pin-input").value="";
     const f=document.getElementById("pin-form");f.classList.add("shake");setTimeout(()=>f.classList.remove("shake"),500);
   }
+}
+
+function forgotPin(){
+  if(!pinTarget)return;
+  const dn=displayName(pinTarget);
+  if(!confirm(`Reset PIN for ${dn}?\n\nThis only works on this device. You'll set a new PIN on the next login. Profile data and history are not affected.`))return;
+  const pins=JSON.parse(localStorage.getItem("kabbu_pins")||"{}");
+  delete pins[pinTarget];
+  localStorage.setItem("kabbu_pins",JSON.stringify(pins));
+  closePinModal();
+  showToast("🔓","PIN reset",`Tap ${dn} again to set a new PIN.`);
 }
 
 // ── The Code ──────────────────────────────────
